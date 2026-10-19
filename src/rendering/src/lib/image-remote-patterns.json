@@ -1,0 +1,6 @@
+[
+  { "protocol": "https", "hostname": "edge*.**" },
+  { "protocol": "https", "hostname": "xmc-*.**" },
+  { "protocol": "https", "hostname": "feaas*.blob.core.windows.net" },
+  { "protocol": "https", "hostname": "*.sitecoresandbox.cloud" }
+]

@@ -1,94 +1,47 @@
-import {
-  Link,
-  LinkField,
-  Text,
-  TextField,
-  useSitecoreContext,
-} from '@sitecore-jss/sitecore-jss-nextjs';
-import React from 'react';
+import { Link, LinkField, Text, TextField, useSitecore } from '@sitecore-content-sdk/nextjs';
 
-interface Fields {
-  data: {
-    datasource: {
-      url: {
-        path: string;
-        siteName: string;
-      };
-      field: {
-        jsonValue: {
-          value: string;
-          editable?: string;
-          metadata?: { [key: string]: unknown };
-        };
-      };
-    };
-    contextItem: {
-      url: {
-        path: string;
-        siteName: string;
-      };
-      field: {
-        jsonValue: {
-          value: string;
-          editable?: string;
-          metadata?: { [key: string]: unknown };
-        };
-      };
-    };
-  };
-}
+type TitleItem = {
+  url?: { path: string; siteName: string };
+  field?: { jsonValue: TextField };
+};
 
 type TitleProps = {
   params: { [key: string]: string };
-  fields: Fields;
+  fields?: { data?: { datasource?: TitleItem; contextItem?: TitleItem } };
 };
 
-type ComponentContentProps = {
-  id: string;
-  styles: string;
-  children: JSX.Element;
-};
-
-const ComponentContent = (props: ComponentContentProps) => {
-  const id = props.id;
-  return (
-    <div className={`component title ${props.styles}`} id={id ? id : undefined}>
-      <div className="component-content">
-        <div className="field-title">{props.children}</div>
-      </div>
-    </div>
-  );
-};
-
-export const Default = (props: TitleProps): JSX.Element => {
+export const Default = (props: TitleProps): React.JSX.Element => {
+  const { page } = useSitecore();
   const datasource = props.fields?.data?.datasource || props.fields?.data?.contextItem;
-  const { sitecoreContext } = useSitecoreContext();
-  const text: TextField = datasource?.field?.jsonValue || {};
+  const sourceText = datasource?.field?.jsonValue;
+  const isAuthorMode = page.mode.isEditing || page.mode.isPreview;
+  // Preserve editor diagnostics without mutating CMS field data held by the Page.
+  const text: TextField =
+    isAuthorMode && !sourceText?.value ? { ...sourceText, value: 'Title field' } : sourceText || {};
   const link: LinkField = {
     value: {
       href: datasource?.url?.path,
-      title: datasource?.field?.jsonValue?.value,
+      title: sourceText?.value?.toString(),
+      ...(isAuthorMode && datasource?.url?.siteName
+        ? { querystring: `sc_site=${datasource.url.siteName}` }
+        : {}),
     },
   };
-  if (sitecoreContext.pageState !== 'normal') {
-    link.value.querystring = `sc_site=${datasource?.url?.siteName}`;
-    if (!text?.value) {
-      text.value = 'Title field';
-      link.value.href = '#';
-    }
-  }
+  const id = props.params.RenderingIdentifier;
 
   return (
-    <ComponentContent styles={props.params.styles} id={props.params.RenderingIdentifier}>
-      <>
-        {sitecoreContext.pageEditing ? (
-          <Text field={text} />
-        ) : (
-          <Link field={link}>
+    <div className={`component title ${props.params.styles ?? ''}`} id={id || undefined}>
+      <div className="component-content">
+        <div className="field-title">
+          {page.mode.isEditing || !link.value.href ? (
             <Text field={text} />
-          </Link>
-        )}
-      </>
-    </ComponentContent>
+          ) : (
+            <Link field={link}>
+              <Text field={text} />
+            </Link>
+          )}
+        </div>
+      </div>
+    </div>
   );
 };

@@ -1,4 +1,4 @@
-import { Text, Field, withDatasourceCheck } from '@sitecore-jss/sitecore-jss-nextjs';
+import { Text, Field, withDatasourceCheck } from '@sitecore-content-sdk/nextjs';
 import { ComponentProps } from 'lib/component-props';
 
 type TextCtaProps = ComponentProps & {
@@ -8,7 +8,7 @@ type TextCtaProps = ComponentProps & {
   };
 };
 
-const TextCta = (props: TextCtaProps): JSX.Element => {
+const TextCta = (props: TextCtaProps): React.JSX.Element => {
   const sxaStyles = `${props.params?.styles || ''}`;
 
   return (

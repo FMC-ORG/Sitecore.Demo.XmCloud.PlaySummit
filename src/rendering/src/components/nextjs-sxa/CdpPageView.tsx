@@ -1,62 +1,33 @@
-import {
-  CdpHelper,
-  LayoutServicePageState,
-  useSitecoreContext,
-} from '@sitecore-jss/sitecore-jss-nextjs';
+import { CdpHelper, useSitecore } from '@sitecore-content-sdk/nextjs';
 import { useEffect } from 'react';
-import { pageView } from '@sitecore-cloudsdk/events/browser';
-import config from 'temp/config';
+import { pageView } from '@sitecore-content-sdk/events';
+import config from 'sitecore.config';
 
-/**
- * This is the CDP page view component.
- * It uses the Sitecore Cloud SDK to enable page view events on the client-side.
- * See Sitecore Cloud SDK documentation for details.
- * https://www.npmjs.com/package/@sitecore-cloudsdk/events
- */
-const CdpPageView = (): JSX.Element => {
-  const {
-    sitecoreContext: { pageState, route, variantId, site },
-  } = useSitecoreContext();
-
-  /**
-   * Determines if the page view events should be turned off.
-   * IMPORTANT: You should implement based on your cookie consent management solution of choice.
-   * By default it is disabled in development mode
-   */
-  const disabled = () => {
-    return process.env.NODE_ENV === 'development';
-  };
-
+const CdpPageView = (): React.JSX.Element => {
+  const { page } = useSitecore();
+  const { route, context } = page.layout.sitecore;
   useEffect(() => {
-    // Do not create events in editing or preview mode or if missing route data
-    if (pageState !== LayoutServicePageState.Normal || !route?.itemId) {
+    if (
+      process.env.NODE_ENV === 'development' ||
+      !page.mode.isNormal ||
+      !route?.itemId ||
+      !config.api.edge.clientContextId
+    )
       return;
-    }
-    // Do not create events if disabled (e.g. we don't have consent)
-    if (disabled()) {
-      return;
-    }
-
     const language = route.itemLanguage || config.defaultLanguage;
-    const scope = process.env.NEXT_PUBLIC_PERSONALIZE_SCOPE;
-
-    const pageVariantId = CdpHelper.getPageVariantId(
-      route.itemId,
-      language,
-      variantId as string,
-      scope
-    );
-    // there can be cases where Events are not initialized which are expected to reject
     pageView({
       channel: 'WEB',
       currency: 'USD',
       page: route.name,
-      pageVariantId,
+      pageVariantId: CdpHelper.getPageVariantId(
+        route.itemId,
+        language,
+        context.variantId as string,
+        config.personalize.scope
+      ),
       language,
-    }).catch((e) => console.debug(e));
-  }, [pageState, route, variantId, site]);
-
+    }).catch(() => console.debug('Native page view unavailable.'));
+  }, [page.mode.isNormal, page.siteName, route, context.variantId]);
   return <></>;
 };
-
 export default CdpPageView;

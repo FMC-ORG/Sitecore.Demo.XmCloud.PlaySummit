@@ -1,78 +1,47 @@
 import React from 'react';
-import { SitecoreContext, LayoutServicePageState } from '@sitecore-jss/sitecore-jss-nextjs';
-import { componentBuilder } from '../src/temp/componentBuilder';
+import { SitecoreProvider, LayoutServicePageState } from '@sitecore-content-sdk/nextjs';
+import components from '../.sitecore/component-map';
+import scConfig from '../sitecore.config';
 import '../src/assets/css/abstracts/mixins.css';
 import '../src/assets/css/main.css';
 import { I18nProvider } from 'next-localization';
 
-export const parameters = {
-  actions: { argTypesRegex: '^on[A-Z].*' },
-  controls: {
-    matchers: {
-      color: /(background|color)$/i,
-      date: /Date$/,
-    },
-  },
-  layout: 'fullscreen',
-  breakpoints: {
-    breakpointNames: {
-      default: '0',
-      sm: '640',
-      md: '768',
-      lg: '1024',
-      xl: '1280',
-      '2xl': '1536',
-    },
-    debounceTimeout: 200,
-  },
-};
-
+export const parameters = { layout: 'fullscreen' };
 export const mockLayoutData = {
   sitecore: {
     context: {
       pageEditing: false,
       pageState: LayoutServicePageState.Normal,
-      Languages: [
-        {
-          Name: 'en',
-        },
-        {
-          Name: 'en-US',
-        },
-        {
-          Name: 'fr',
-        },
-        {
-          Name: 'fr-CA',
-        },
-        {
-          Name: 'es-ES',
-        },
-        {
-          Name: 'ja-JP',
-        },
-      ],
+      EventInfo: { titlePrefix: 'PLAY! Summit' },
+      Languages: [{ Name: 'en' }, { Name: 'fr-CA' }, { Name: 'ja-JP' }],
     },
-    setContext: () => {
-      // nothing
-    },
-    route: {
-      itemId: null,
-    },
+    route: { name: 'story', itemId: null, fields: {}, placeholders: {} },
   },
 };
-
+const page = {
+  layout: mockLayoutData,
+  siteName: 'playwebsite',
+  locale: 'en',
+  mode: {
+    name: LayoutServicePageState.Normal,
+    designLibrary: { isVariantGeneration: false },
+    isNormal: true,
+    isEditing: false,
+    isPreview: false,
+    isDesignLibrary: false,
+  },
+};
 export const decorators = [
   (Story) => (
-    <SitecoreContext
-      componentFactory={componentBuilder.getComponentFactory({
-        isEditing: mockLayoutData.sitecore.context.pageEditing,
-      })}
-      layoutData={mockLayoutData}
+    <SitecoreProvider
+      api={scConfig.api}
+      componentMap={components}
+      page={page}
+      loadImportMap={() => import('../.sitecore/import-map')}
     >
       <I18nProvider>
         <Story />
       </I18nProvider>
-    </SitecoreContext>
+    </SitecoreProvider>
   ),
 ];

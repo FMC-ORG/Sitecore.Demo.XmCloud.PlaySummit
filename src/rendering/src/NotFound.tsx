@@ -3,7 +3,7 @@ import Head from 'next/head';
 /**
  * Rendered in case if we have 404 error
  */
-const NotFound = (): JSX.Element => (
+const NotFound = (): React.JSX.Element => (
   <>
     <Head>
       <title>404: NotFound</title>

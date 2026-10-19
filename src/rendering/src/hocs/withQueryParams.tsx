@@ -9,7 +9,7 @@ const withQueryParams = <T extends WithQueryParamsProps = WithQueryParamsProps>(
   WrappedComponent: ComponentType<T>,
   params: string[]
 ): ComponentType => {
-  const ComponentWithQueryParams = (props: T): JSX.Element => {
+  const ComponentWithQueryParams = (props: T): React.JSX.Element => {
     const { query, isReady } = useRouter();
 
     if (!isReady) {

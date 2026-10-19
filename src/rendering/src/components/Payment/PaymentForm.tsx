@@ -2,7 +2,7 @@ import { ComponentProps } from 'lib/component-props';
 import OrderSummary from './OrderSummary';
 import PaymentAndBillingForm from './PaymentAndBillingForm';
 
-const PaymentForm = (props: ComponentProps): JSX.Element => {
+const PaymentForm = (props: ComponentProps): React.JSX.Element => {
   const sxaStyles = `${props.params?.styles || ''}`;
 
   return (

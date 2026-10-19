@@ -4,11 +4,10 @@ import {
   withDatasourceCheck,
   RichTextField,
   ImageField,
-} from '@sitecore-jss/sitecore-jss-nextjs';
+} from '@sitecore-content-sdk/nextjs';
 import { ComponentProps } from 'lib/component-props';
 import { QuestionnaireQuestion } from './QuestionnaireQuestion';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { logAudiencePreferenceEvent } from 'src/services/CdpService';
 import { logAudiencePreferenceEvent as logAudiencePreferenceEventCloudSDK } from 'src/services/CloudSDKService';
 import { GraphQLSession } from 'src/types/session';
 import SessionItem from 'components/Sessions/SessionItem';
@@ -59,7 +58,7 @@ export type QuestionnaireOption = {
   sessionType: { jsonValue: Field };
 };
 
-const Questionnaire = (props: QuestionnaireProps): JSX.Element => {
+const Questionnaire = (props: QuestionnaireProps): React.JSX.Element => {
   const [currQuestionIndex, setCurrQuestionIndex] = useState(0);
   const [showResults, setShowResults] = useState(false);
   const [selectedOptionId, setSelectedOptionId] = useState('');
@@ -72,37 +71,40 @@ const Questionnaire = (props: QuestionnaireProps): JSX.Element => {
     () => props.fields?.data?.datasource,
     [props.fields?.data?.datasource]
   );
-  const questions = useMemo(() => datasource?.questions.results, [datasource?.questions.results]);
+  const questions = useMemo(
+    () => datasource?.questions?.results ?? [],
+    [datasource?.questions?.results]
+  );
+  // Deleted/unpublished sessions and sessions without audience/type tags are tolerated.
   const sessions = useMemo(
-    () => props.fields?.data?.sessions?.children?.results,
+    () => (props.fields?.data?.sessions?.children?.results ?? []).filter((s) => s?.url?.path),
     [props.fields?.data?.sessions?.children?.results]
   );
 
   // This is temporary and will not be needed after Search implementation
   useEffect(() => {
+    const typeOf = (session: extendedGraphQLSession) => session.type?.jsonValue?.value;
+    const audienceOf = (session: extendedGraphQLSession) =>
+      session.audience?.targetItems?.[0]?.name?.value;
     const sessionsByType = [
-      ...sessions.filter((session) => session.type.jsonValue.value === selectedSessionType),
-      ...sessions.filter((session) => session.type.jsonValue.value !== selectedSessionType),
+      ...sessions.filter((session) => typeOf(session) === selectedSessionType),
+      ...sessions.filter((session) => typeOf(session) !== selectedSessionType),
     ];
 
     const sessionsByAudienceAndType = [
-      ...sessionsByType.filter(
-        (session) => session.audience.targetItems[0].name.value === selectedAudience
-      ),
-      ...sessionsByType.filter(
-        (session) => session.audience.targetItems[0].name.value !== selectedAudience
-      ),
+      ...sessionsByType.filter((session) => audienceOf(session) === selectedAudience),
+      ...sessionsByType.filter((session) => audienceOf(session) !== selectedAudience),
     ];
 
     setSessionResults(sessionsByAudienceAndType.slice(0, 4));
   }, [selectedAudience, selectedSessionType, sessions]);
 
   const handleOptionSelect = useCallback(
-    async (option: QuestionnaireOption) => {
+    (option: QuestionnaireOption) => {
       setSelectedOptionId(option.id);
 
-      const audience = option.audience.jsonValue.value as string;
-      const sessionType = option.sessionType.jsonValue.value as string;
+      const audience = option.audience?.jsonValue?.value as string;
+      const sessionType = option.sessionType?.jsonValue?.value as string;
 
       const goToNext = () => {
         setCurrQuestionIndex(currQuestionIndex + 1);
@@ -111,17 +113,14 @@ const Questionnaire = (props: QuestionnaireProps): JSX.Element => {
       };
 
       if (!!audience) {
-        // Log the 'AUDIENCE_PREFERENCE' custom event to CDP using the Cloud SDK
-        try {
-          await logAudiencePreferenceEventCloudSDK(audience);
-        } catch (e) {
-          console.error(e);
-        }
+        // Record the native AUDIENCE_PREFERENCE event without blocking the visitor: a slow or
+        // unavailable Edge endpoint, missing configuration or edit/preview mode must not stall the UI.
+        logAudiencePreferenceEventCloudSDK(audience).catch((e) =>
+          console.debug('Native audience event unavailable.', e)
+        );
 
-        logAudiencePreferenceEvent(audience).then(() => {
-          setSelectedAudience(audience);
-          goToNext();
-        });
+        setSelectedAudience(audience);
+        goToNext();
       }
 
       if (!!sessionType) {
@@ -162,7 +161,7 @@ const Questionnaire = (props: QuestionnaireProps): JSX.Element => {
       {showResults && (
         <div className="questionnaire-recommendations">
           <div className="questionnaire-recommendations-header">
-            <Text tag="h3" field={datasource?.title.jsonValue} />
+            <Text tag="h3" field={datasource?.title?.jsonValue} />
             <button
               className="btn-secondary btn-secondary-light"
               onClick={() => restartQuestionnaire()}

@@ -1,5 +1,5 @@
 import { ComponentProps } from 'lib/component-props';
-import { LinkField, Link, withDatasourceCheck } from '@sitecore-jss/sitecore-jss-nextjs';
+import { LinkField, Link, withDatasourceCheck } from '@sitecore-content-sdk/nextjs';
 
 export type HeroSectionCtaProps = ComponentProps & {
   fields: {
@@ -7,7 +7,7 @@ export type HeroSectionCtaProps = ComponentProps & {
   };
 };
 
-const HeroSectionCta = ({ fields, params }: HeroSectionCtaProps): JSX.Element => {
+const HeroSectionCta = ({ fields, params }: HeroSectionCtaProps): React.JSX.Element => {
   const sxaStyles = `${params?.styles || ''}`;
 
   return (

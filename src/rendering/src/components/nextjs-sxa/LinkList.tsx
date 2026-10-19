@@ -1,5 +1,4 @@
-import React from 'react';
-import { Link as JssLink, Text, LinkField, TextField } from '@sitecore-jss/sitecore-jss-nextjs';
+import { Link, Text, LinkField, TextField } from '@sitecore-content-sdk/nextjs';
 
 type ResultsFieldLink = {
   field: {
@@ -44,25 +43,26 @@ const LinkListItem = (props: LinkListItemProps) => {
   return (
     <li className={className}>
       <div className="field-link">
-        <JssLink field={props.field} />
+        <Link field={props.field} />
       </div>
     </li>
   );
 };
 
-export const Default = (props: LinkListProps): JSX.Element => {
+export const Default = (props: LinkListProps): React.JSX.Element => {
   const datasource = props.fields?.data?.datasource;
   const styles = `component link-list ${props.params.styles}`.trimEnd();
   const id = props.params.RenderingIdentifier;
 
   if (datasource) {
-    const list = datasource.children.results
+    const children = datasource.children?.results ?? [];
+    const list = children
       .filter((element: ResultsFieldLink) => element?.field?.link)
       .map((element: ResultsFieldLink, key: number) => (
         <LinkListItem
           index={key}
           key={`${key}${element.field.link}`}
-          total={datasource.children.results.length}
+          total={children.length}
           field={element.field.link}
         />
       ));

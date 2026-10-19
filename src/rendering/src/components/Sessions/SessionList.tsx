@@ -1,12 +1,12 @@
 import Link from 'next/link';
-import { Text } from '@sitecore-jss/sitecore-jss-nextjs';
+import { Text } from '@sitecore-content-sdk/nextjs';
 import { getSessionTime } from '../../helpers/DateHelper';
 import { GraphQLSession } from 'src/types/session';
 import InfoText from '../NonSitecore/InfoText';
 import { faClock, faDoorOpen, faUser } from '@fortawesome/free-solid-svg-icons';
 import { useI18n } from 'next-localization';
 
-const SessionListItem = (props: GraphQLSession): JSX.Element => {
+const SessionListItem = (props: GraphQLSession): React.JSX.Element => {
   const premiumCssClass = props.premium?.value ? 'premium' : '';
   const { t } = useI18n();
 
@@ -45,7 +45,7 @@ const SessionListItem = (props: GraphQLSession): JSX.Element => {
         <div className="speaker-name" key={index}>
           <InfoText Icon={faUser}>
             <Link href={speaker.url.path}>
-              <Text field={speaker.name} tag="a" />
+              <Text field={speaker.name} tag="span" />
             </Link>
           </InfoText>
         </div>
@@ -87,7 +87,7 @@ export type SessionListProps = {
   };
 };
 
-const SessionList = (props: SessionListProps): JSX.Element => {
+const SessionList = (props: SessionListProps): React.JSX.Element => {
   const { t } = useI18n();
   const sessions =
     props?.fields?.data?.contextItem?.sessions?.targetItems &&

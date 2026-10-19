@@ -1,11 +1,5 @@
 import Link from 'next/link';
-import {
-  withDatasourceCheck,
-  Image,
-  Text,
-  useSitecoreContext,
-  LayoutServicePageState,
-} from '@sitecore-jss/sitecore-jss-nextjs';
+import { withDatasourceCheck, Image, Text, useSitecore } from '@sitecore-content-sdk/nextjs';
 import { ComponentProps } from 'lib/component-props';
 import { Sponsor } from 'src/types/sponsor';
 import { getPublicAssetUrl } from '../../../src/helpers/PublicUrlHelper';
@@ -16,11 +10,11 @@ type SponsorsGridProps = ComponentProps & {
   };
 };
 
-const SponsorsGrid = (props: SponsorsGridProps): JSX.Element => {
-  const { sitecoreContext } = useSitecoreContext();
+const SponsorsGrid = (props: SponsorsGridProps): React.JSX.Element => {
+  const { page } = useSitecore();
 
   const publicUrl = getPublicAssetUrl();
-  const isPageEditing = sitecoreContext.pageState === LayoutServicePageState.Edit;
+  const isPageEditing = page.mode.isEditing;
   const hasSponsors = !!props.fields;
 
   const sxaStyles = `${props.params?.styles || ''}`;
@@ -31,18 +25,18 @@ const SponsorsGrid = (props: SponsorsGridProps): JSX.Element => {
     <p>Missing Datasource Item</p>
   );
 
-  const sponsors =
-    props.fields?.items &&
-    props.fields.items.map((sponsor, index) => (
+  const sponsors = (props.fields?.items ?? [])
+    .filter((sponsor) => sponsor?.url)
+    .map((sponsor, index) => (
       <Link key={index} href={sponsor.url} passHref className="grid-item">
         <Image
-          field={sponsor.fields.Logo}
-          alt={sponsor.fields.Name.value}
+          field={sponsor.fields?.Logo}
+          alt={sponsor.fields?.Name?.value}
           width={265}
           height={265}
         />
         <div className="item-details">
-          <Text tag="p" field={sponsor.fields.Name} />
+          <Text tag="p" field={sponsor.fields?.Name} />
         </div>
       </Link>
     ));

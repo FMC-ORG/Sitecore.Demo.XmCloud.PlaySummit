@@ -1,5 +1,7 @@
 # Quick Start
 
+> **Content SDK migration:** the rendering host now uses Sitecore Content SDK (Next.js 16 Pages Router, Node 24). JSS commands below are historical. See [Developing the Content SDK rendering host](content-sdk-development.md) for the current remote-first workflow.
+
 If you want to explore the front-end of the website without setting up a local Content Management environment (which requires Docker and other dependencies) - you can follow this guide.
 
 You will be able to change Next.js components, but you will not be able to update the website content or presentation details.

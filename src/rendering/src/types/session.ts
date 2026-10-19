@@ -1,4 +1,4 @@
-import { Field, ImageField } from '@sitecore-jss/sitecore-jss-nextjs';
+import { Field, ImageField } from '@sitecore-content-sdk/nextjs';
 import { Timeslot } from '../interfaces/Timeslot';
 import { MinimalGraphQLSpeaker } from './speaker';
 import { GraphQLDay } from './day';
@@ -15,7 +15,7 @@ export type GraphQLSession = {
     jsonValue: ImageField;
   };
   speakers: {
-    targetItems: MinimalGraphQLSpeaker[];
+    targetItems: (MinimalGraphQLSpeaker & { role?: Field<string> })[];
   };
   rooms: {
     targetItems: GraphQLRoom[];

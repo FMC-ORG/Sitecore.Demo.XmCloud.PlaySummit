@@ -1,5 +1,7 @@
 # Website
 
+> **Content SDK migration:** the rendering host now uses Sitecore Content SDK (Next.js 16 Pages Router, Node 24). JSS commands below are historical. See [Developing the Content SDK rendering host](content-sdk-development.md) for the current remote-first workflow.
+
 ## Project Description
 
 Main PLAY! Summit website built with:

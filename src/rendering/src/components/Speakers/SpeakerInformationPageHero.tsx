@@ -1,10 +1,4 @@
-import {
-  Field,
-  ImageField,
-  LayoutServicePageState,
-  Text,
-  useSitecoreContext,
-} from '@sitecore-jss/sitecore-jss-nextjs';
+import { Field, ImageField, Text, useSitecore } from '@sitecore-content-sdk/nextjs';
 import { ComponentProps } from 'lib/component-props';
 import InformationPageHero from '../NonSitecore/InformationPageHero';
 import { useI18n } from 'next-localization';
@@ -25,13 +19,13 @@ export type SpeakerInformationPageHeroProps = ComponentProps & {
   };
 };
 
-const SpeakerInformationPageHero = (props: SpeakerInformationPageHeroProps): JSX.Element => {
-  const { sitecoreContext } = useSitecoreContext();
+const SpeakerInformationPageHero = (props: SpeakerInformationPageHeroProps): React.JSX.Element => {
+  const { page } = useSitecore();
   const { t } = useI18n();
 
-  const isPageEditing = sitecoreContext.pageState === LayoutServicePageState.Edit;
+  const isPageEditing = page.mode.isEditing;
 
-  const { fields, ...propsRest } = props;
+  const { fields = {} as SpeakerInformationPageHeroProps['fields'], ...propsRest } = props;
   const newFields = {
     Name: fields.Name,
     Image: fields.Picture,
@@ -41,30 +35,27 @@ const SpeakerInformationPageHero = (props: SpeakerInformationPageHeroProps): JSX
     LinkedinProfileLink: fields.LinkedinProfileLink,
   };
 
-  const qualificative = props.fields.Featured?.value ? t('featured') || 'featured' : '';
+  const qualificative = fields.Featured?.value ? t('featured') || 'featured' : '';
 
   const informations =
-    props.fields.JobTitle?.value ||
-    props.fields.Company?.value ||
-    props.fields.Location?.value ||
-    isPageEditing ? (
+    fields.JobTitle?.value || fields.Company?.value || fields.Location?.value || isPageEditing ? (
       <>
-        {props.fields.JobTitle?.value || isPageEditing ? (
+        {fields.JobTitle?.value || isPageEditing ? (
           <div>
             <span className="label">{t('Job Title') || 'Job Title'}:</span>{' '}
-            <Text field={props.fields.JobTitle} tag="span" />
+            <Text field={fields.JobTitle} tag="span" />
           </div>
         ) : undefined}
-        {props.fields.Company?.value || isPageEditing ? (
+        {fields.Company?.value || isPageEditing ? (
           <div>
             <span className="label">{t('Company') || 'Company'}:</span>{' '}
-            <Text field={props.fields.Company} tag="span" />
+            <Text field={fields.Company} tag="span" />
           </div>
         ) : undefined}
-        {props.fields.Location?.value || isPageEditing ? (
+        {fields.Location?.value || isPageEditing ? (
           <div>
             <span className="label">{t('Location') || 'Location'}:</span>{' '}
-            <Text field={props.fields.Location} tag="span" />
+            <Text field={fields.Location} tag="span" />
           </div>
         ) : undefined}
       </>
@@ -73,8 +64,8 @@ const SpeakerInformationPageHero = (props: SpeakerInformationPageHeroProps): JSX
   return (
     <>
       <Head>
-        <meta property="og:title" content={props.fields?.Name?.value} />
-        <meta property="og:image" content={props.fields?.Picture?.value.src} />
+        <meta property="og:title" content={fields.Name?.value} />
+        <meta property="og:image" content={fields.Picture?.value?.src} />
         <meta property="og:type" content="speaker" />
       </Head>
       <InformationPageHero

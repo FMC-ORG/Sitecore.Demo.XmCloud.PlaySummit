@@ -6,9 +6,8 @@ import {
   ImageField,
   Placeholder,
   withDatasourceCheck,
-} from '@sitecore-jss/sitecore-jss-nextjs';
+} from '@sitecore-content-sdk/nextjs';
 import { ComponentProps } from 'lib/component-props';
-import { isCdpConfigured } from '../../services/CdpService';
 
 export type HeroProps = ComponentProps & {
   fields: {
@@ -20,47 +19,27 @@ export type HeroProps = ComponentProps & {
   };
 };
 
-const HeroSection = (props: HeroProps): JSX.Element => {
-  const sxaStyles = `${props.params?.styles || ''}`;
-
-  // React throws an error if the root element of the component is removed from the DOM.
-  // The #cdp-audience-based-home-page-hero div outerHTML will be set by Sitecore Personalize.
-  // Thus, we wrap it in another div that becomes the component root element and React is happy.
-  const withCdp = isCdpConfigured && (
-    <div className="cdp-hero-wrapper">
-      <div id="cdp-audience-based-home-page-hero"></div>
+const HeroSection = (props: HeroProps): React.JSX.Element => (
+  <section
+    className={`hero-section hero-section-editable hero_${props.rendering.uid} ${
+      props.params?.styles || ''
+    }`}
+  >
+    <div className="hero-background">
+      <Image field={props.fields.Hero} />
     </div>
-  );
-
-  const withoutCdp = !isCdpConfigured && (
-    <>
-      <section
-        className={`hero-section hero-section-editable hero_${props.rendering.uid} ${sxaStyles}`}
-      >
-        <div className="hero-background">
-          <Image field={props.fields.Hero} />
+    <div className="hero-container">
+      <div className="container-content">
+        <div className="content-text">
+          <Text field={props.fields.Slogan} tag="p" className="slogan" />
+          <Text field={props.fields.Eyebrow} tag="h1" className="expo" />
+          <Text field={props.fields.Title} tag="h3" className="title" />
+          <RichText field={props.fields.Body} tag="div" className="subtitle" />
         </div>
-        <div className="hero-container">
-          <div className="container-content">
-            <div className="content-text">
-              <Text field={props.fields.Slogan} tag="p" className="slogan" />
-              <Text field={props.fields.Eyebrow} tag="h1" className="expo" />
-              <Text field={props.fields.Title} tag="h3" className="title" />
-              <RichText field={props.fields.Body} tag="div" className="subtitle" />
-            </div>
-            <Placeholder name="jss-hero-section-content" rendering={props.rendering} />
-          </div>
-        </div>
-      </section>
-    </>
-  );
-
-  return (
-    <>
-      {withCdp}
-      {withoutCdp}
-    </>
-  );
-};
+        <Placeholder name="jss-hero-section-content" rendering={props.rendering} />
+      </div>
+    </div>
+  </section>
+);
 
 export const Default = withDatasourceCheck()<HeroProps>(HeroSection);

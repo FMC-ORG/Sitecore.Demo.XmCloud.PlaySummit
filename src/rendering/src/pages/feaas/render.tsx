@@ -8,7 +8,7 @@ import * as FEAAS from '@sitecore-feaas/clientside/react';
  * - Rendering all the registered components.
  * - The page is rendered only if it's requested by the api route (/api/editing/feaas/render) using the preview mode.
  */
-const FEAASRender = ({ feaasSrc }: { feaasSrc: string }): JSX.Element => {
+const FEAASRender = ({ feaasSrc }: { feaasSrc: string }): React.JSX.Element => {
   return (
     <>
       {/** Render the component if the "feaasSrc" is provided  */}

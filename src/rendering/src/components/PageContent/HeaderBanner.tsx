@@ -1,10 +1,4 @@
-import {
-  Text,
-  Field,
-  Image,
-  ImageField,
-  withDatasourceCheck,
-} from '@sitecore-jss/sitecore-jss-nextjs';
+import { Text, Field, Image, ImageField, withDatasourceCheck } from '@sitecore-content-sdk/nextjs';
 import { ComponentProps } from 'lib/component-props';
 
 type HeaderBannerProps = ComponentProps & {
@@ -16,10 +10,10 @@ type HeaderBannerProps = ComponentProps & {
   };
 };
 
-const HeaderBanner = (props: HeaderBannerProps): JSX.Element => {
+const HeaderBanner = (props: HeaderBannerProps): React.JSX.Element => {
   return (
     <section className="section header-banner">
-      <Image field={props.fields.backgroundImage} alt={props.fields.title} loading="lazy" />
+      <Image field={props.fields.backgroundImage} alt={props.fields.title?.value} loading="lazy" />
       <div className="section-content section-content-left container">
         <Text className="eyebrow" tag="p" field={props.fields.eyebrow} />
         <Text className="title" tag="h1" field={props.fields.title} />

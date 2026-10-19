@@ -1,16 +1,12 @@
-import Head from 'next/head';
-import {
-  GraphQLErrorPagesService,
-  SitecoreContext,
-  ErrorPages,
-} from '@sitecore-jss/sitecore-jss-nextjs';
-import { SitecorePageProps } from 'lib/page-props';
-import Layout from 'src/Layout';
-import { componentBuilder } from 'temp/componentBuilder';
+﻿import { JSX } from 'react';
 import { GetStaticProps } from 'next';
-import config from 'temp/config';
-import { siteResolver } from 'lib/site-resolver';
-import clientFactory from 'lib/graphql-client-factory';
+import Head from 'next/head';
+import { SitecorePageProps, ErrorPage } from '@sitecore-content-sdk/nextjs';
+import Layout from 'src/Layout';
+import scConfig from 'sitecore.config';
+import client from 'lib/sitecore-client';
+import components from '.sitecore/component-map';
+import Providers from 'src/Providers';
 
 /**
  * Rendered in case if we have 500 error
@@ -29,47 +25,40 @@ const ServerError = (): JSX.Element => (
 );
 
 const Custom500 = (props: SitecorePageProps): JSX.Element => {
-  if (!(props && props.layoutData)) {
+  if (!(props && props.page)) {
     return <ServerError />;
   }
 
   return (
-    <SitecoreContext
-      componentFactory={componentBuilder.getComponentFactory()}
-      layoutData={props.layoutData}
-    >
-      <Layout layoutData={props.layoutData} headLinks={props.headLinks} />
-    </SitecoreContext>
+    <Providers componentProps={props.componentProps} page={props.page}>
+      <Layout page={props.page} />
+    </Providers>
   );
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  const site = siteResolver.getByName(config.sitecoreSiteName);
-  const errorPagesService = new GraphQLErrorPagesService({
-    clientFactory,
-    siteName: site.name,
-    language: context.locale || context.defaultLocale || config.defaultLanguage,
-    retries:
-      (process.env.GRAPH_QL_SERVICE_RETRIES &&
-        parseInt(process.env.GRAPH_QL_SERVICE_RETRIES, 10)) ||
-      0,
-  });
-  let resultErrorPages: ErrorPages | null = null;
+  const props: SitecorePageProps = {
+    page: null,
+  };
 
-  if (!process.env.DISABLE_SSG_FETCH) {
+  if (scConfig.generateStaticPaths) {
     try {
-      resultErrorPages = await errorPagesService.fetchErrorPages();
+      props.page = await client.getErrorPage(ErrorPage.InternalServerError, {
+        site: scConfig.defaultSite,
+        locale: context.locale || context.defaultLocale || scConfig.defaultLanguage,
+      });
     } catch (error) {
       console.log('Error occurred while fetching error pages');
       console.log(error);
     }
   }
 
+  if (props.page) {
+    props.componentProps = await client.getComponentData(props.page.layout, context, components);
+  }
+
   return {
-    props: {
-      headLinks: [],
-      layoutData: resultErrorPages?.serverErrorPage?.rendered || null,
-    },
+    props,
   };
 };
 

@@ -1,4 +1,4 @@
-import { Field, Image, ImageField, Text } from '@sitecore-jss/sitecore-jss-nextjs';
+import { Field, Image, ImageField, Text } from '@sitecore-content-sdk/nextjs';
 import { ComponentProps } from 'lib/component-props';
 import {
   faFacebookF,
@@ -19,15 +19,15 @@ export type InformationPageHeroProps = ComponentProps & {
   };
   type: string;
   qualificative: string;
-  informations?: JSX.Element;
+  informations?: React.JSX.Element;
 };
 
-const InformationPageHero = (props: InformationPageHeroProps): JSX.Element => {
+const InformationPageHero = (props: InformationPageHeroProps): React.JSX.Element => {
   const informations = props.informations ? (
     <div className="informations">{props.informations}</div>
   ) : undefined;
 
-  const lowerCaseQualificative = props.qualificative.toLowerCase();
+  const lowerCaseQualificative = (props.qualificative ?? '').toLowerCase();
   const sxaStyles = `${props.params?.styles || ''}`;
 
   return (
@@ -36,7 +36,7 @@ const InformationPageHero = (props: InformationPageHeroProps): JSX.Element => {
     >
       <div className="content">
         <div className="image-container">
-          <Image field={props.fields.Image} alt="Image" loading="lazy" />
+          <Image field={props.fields?.Image} alt="Image" loading="lazy" />
         </div>
         <div className="gradient-container"></div>
         <div className="content-container">
@@ -47,15 +47,15 @@ const InformationPageHero = (props: InformationPageHeroProps): JSX.Element => {
                 {props.type}:
               </p>
               <h1 className="name">
-                <Text field={props.fields.Name} />
+                <Text field={props.fields?.Name} />
               </h1>
             </div>
             {informations}
             <div className="external-website-icons">
-              <SocialIcon Icon={faFacebookF} Link={props.fields.FacebookProfileLink} />
-              <SocialIcon Icon={faTwitter} Link={props.fields.TwitterProfileLink} />
-              <SocialIcon Icon={faLinkedinIn} Link={props.fields.LinkedinProfileLink} />
-              <SocialIcon Icon={faInstagram} Link={props.fields.InstagramProfileLink} />
+              <SocialIcon Icon={faFacebookF} Link={props.fields?.FacebookProfileLink} />
+              <SocialIcon Icon={faTwitter} Link={props.fields?.TwitterProfileLink} />
+              <SocialIcon Icon={faLinkedinIn} Link={props.fields?.LinkedinProfileLink} />
+              <SocialIcon Icon={faInstagram} Link={props.fields?.InstagramProfileLink} />
             </div>
           </div>
         </div>

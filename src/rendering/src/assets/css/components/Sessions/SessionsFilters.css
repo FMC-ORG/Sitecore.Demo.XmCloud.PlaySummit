@@ -2,7 +2,7 @@
   @apply space-y-5;
 
   .filters-row {
-    @apply w-full px-10 flex-wrap overflow-hidden text-sm space-y-5 hidden;
+    @apply w-full px-10 flex-wrap overflow-hidden text-sm space-y-5 flex;
     @apply md:space-y-0;
 
     .filters-col {
@@ -31,7 +31,7 @@
         .checkbox-label.space-available-checkbox {
           @apply inline-flex items-center w-auto;
 
-          input[type="checkbox"] {
+          input[type='checkbox'] {
             @apply mt-0;
           }
 

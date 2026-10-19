@@ -1,11 +1,4 @@
-import {
-  RichText,
-  Text,
-  Field,
-  ImageField,
-  Image,
-  DateField,
-} from '@sitecore-jss/sitecore-jss-nextjs';
+import { RichText, Text, Field, ImageField, Image, DateField } from '@sitecore-content-sdk/nextjs';
 import { ComponentProps } from 'lib/component-props';
 import { newsDateFormatter } from '../../helpers/DateHelper';
 import Head from 'next/head';
@@ -21,7 +14,7 @@ type NewsDetailProps = ComponentProps & {
   };
 };
 
-const NewsDetail = (props: NewsDetailProps): JSX.Element => {
+const NewsDetail = (props: NewsDetailProps): React.JSX.Element => {
   const sxaStyles = `${props.params?.styles || ''}`;
 
   return (
@@ -29,7 +22,7 @@ const NewsDetail = (props: NewsDetailProps): JSX.Element => {
       <Head>
         <meta property="og:description" content={removeTags(props.fields?.Excerpt?.value)} />
         <meta property="og:title" content={props.fields?.Title?.value} />
-        <meta property="og:image" content={props.fields?.Image?.value.src} />
+        <meta property="og:image" content={props.fields?.Image?.value?.src} />
         <meta property="og:type" content="news" />
       </Head>
       <section className={`section news-detail ${sxaStyles}`}>

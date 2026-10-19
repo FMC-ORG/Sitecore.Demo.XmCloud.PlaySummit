@@ -1,88 +1,62 @@
-const jssConfig = require('./src/temp/config');
-const plugins = require('./src/temp/next-config-plugins') || {};
+const path = require('path');
+const remotePatterns = require('./src/lib/image-remote-patterns.json');
+// CSDK 2.4.1's export points at a missing directory; use its shipped public root shim.
+const componentPropsLoader = path.resolve(
+  path.dirname(require.resolve('@sitecore-content-sdk/nextjs')),
+  '../..',
+  'component-props-loader.js'
+);
 
-const publicUrl = jssConfig.publicUrl;
-
-/**
- * @type {import('next').NextConfig}
- */
+/** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Set assetPrefix to our public URL
-  assetPrefix: publicUrl,
-
-  // Allow specifying a distinct distDir when concurrently running app in a container
   distDir: process.env.NEXTJS_DIST_DIR || '.next',
-
-  // Make the same PUBLIC_URL available as an environment variable on the client bundle
-  env: {
-    PUBLIC_URL: publicUrl,
-  },
-
-  i18n: {
-    // These are all the locales you want to support in your application.
-    // These should generally match (or at least be a subset of) those in Sitecore.
-    // DEMO TEAM CUSTOMIZATION - Remove unused languages and add some
-    locales: [
-      'en',
-      'fr-CA',
-      'ja-JP',
-    ],
-    // END CUSTOMIZATION
-    // This is the locale that will be used when visiting a non-locale
-    // prefixed path e.g. `/styleguide`.
-    defaultLocale: jssConfig.defaultLanguage,
-    localeDetection: false, // DEMO TEAM CUSTOMIZATION - Disable locale detection
-  },
-
-  // Enable React Strict Mode
   reactStrictMode: true,
-
-  // use this configuration to ensure that only images from the whitelisted domains
-  // can be served from the Next.js Image Optimization API
-  // see https://nextjs.org/docs/app/api-reference/components/image#remotepatterns
-  images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'edge*.**',
-        port: '',
-      },
-      {
-        protocol: 'https',
-        hostname: 'feaas*.blob.core.windows.net',
-        port: '',
-      },
-    ]
+  poweredByHeader: false,
+  i18n: {
+    locales: ['en', 'fr-CA', 'ja-JP'],
+    defaultLocale: process.env.NEXT_PUBLIC_DEFAULT_LANGUAGE || 'en',
+    localeDetection: false,
   },
-
+  images: {
+    remotePatterns,
+  },
   async rewrites() {
-    // When in connected mode we want to proxy Sitecore paths off to Sitecore
+    const host = process.env.NEXT_PUBLIC_SITECORE_API_HOST || process.env.SITECORE_API_HOST;
     return [
-      // API endpoints
-      {
-        source: '/sitecore/api/:path*',
-        destination: `${jssConfig.sitecoreApiHost}/sitecore/api/:path*`,
-      },
-      // media items
-      {
-        source: '/-/:path*',
-        destination: `${jssConfig.sitecoreApiHost}/-/:path*`,
-      },
-      // healthz check
-      {
-        source: '/healthz',
-        destination: '/api/healthz',
-      },
-      // rewrite for Sitecore service pages
-      {
-        source: '/sitecore/service/:path*',
-        destination: `${jssConfig.sitecoreApiHost}/sitecore/service/:path*`,
-      },
+      ...(host
+        ? [
+            { source: '/sitecore/api/:path*', destination: `${host}/sitecore/api/:path*` },
+            { source: '/-/:path*', destination: `${host}/-/:path*` },
+            { source: '/sitecore/service/:path*', destination: `${host}/sitecore/service/:path*` },
+          ]
+        : []),
+      { source: '/healthz', destination: '/api/healthz' },
+      { source: '/robots.txt', destination: '/api/robots' },
+      { source: '/sitemap:id([\\w-]{0,}).xml', destination: '/api/sitemap' },
+      { source: '/feaas-render', destination: '/api/editing/feaas/render' },
     ];
   },
+  webpack(config, options) {
+    if (!options.isServer) {
+      config.module.rules.unshift({
+        test: /src[/\\]components[/\\].*\.tsx$/,
+        use: [componentPropsLoader],
+      });
+    } else {
+      config.externals = [
+        {
+          '@sitecore-feaas/clientside/react': 'commonjs @sitecore-feaas/clientside/react',
+          '@sitecore/byoc': 'commonjs @sitecore/byoc',
+          '@sitecore/byoc/react': 'commonjs @sitecore/byoc/react',
+        },
+        ...config.externals,
+      ];
+    }
+    return config;
+  },
 };
 
-module.exports = () => {
-  // Run the base config through any configured plugins
-  return Object.values(plugins).reduce((acc, plugin) => plugin(acc), nextConfig);
-};
+module.exports =
+  process.env.ANALYZE === 'true'
+    ? require('@next/bundle-analyzer')({ enabled: true })(nextConfig)
+    : nextConfig;

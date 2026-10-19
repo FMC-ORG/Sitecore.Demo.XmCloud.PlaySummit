@@ -4,11 +4,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { TICKETS } from '../../models/mock-tickets';
 import { ComponentProps } from 'lib/component-props';
 import { useI18n } from 'next-localization';
-import { logTicketSelected } from 'src/services/CdpService';
 import { logTicketSelected as logTicketSelectedCloudSDK } from 'src/services/CloudSDKService';
 import useTicketOfferId from 'src/hooks/useTicketOffer';
 
-const TicketGrid = (props: ComponentProps): JSX.Element => {
+const TicketGrid = (props: ComponentProps): React.JSX.Element => {
   const ticketOfferId = useTicketOfferId();
 
   const ticketsToDisplay = TICKETS.filter((ticket) => !ticket.isUpgrade);
@@ -22,8 +21,6 @@ const TicketGrid = (props: ComponentProps): JSX.Element => {
     } catch (e) {
       console.error(e);
     }
-
-    return logTicketSelected();
   };
 
   const tickets =

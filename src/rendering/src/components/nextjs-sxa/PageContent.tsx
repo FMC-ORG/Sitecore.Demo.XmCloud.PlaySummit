@@ -1,9 +1,4 @@
-import React from 'react';
-import {
-  RichText as JssRichText,
-  useSitecoreContext,
-  RichTextField,
-} from '@sitecore-jss/sitecore-jss-nextjs';
+import { RichText, useSitecore, RichTextField } from '@sitecore-content-sdk/nextjs';
 
 interface Fields {
   Content: RichTextField;
@@ -17,7 +12,7 @@ type PageContentProps = {
 type ComponentContentProps = {
   id: string;
   styles: string;
-  children: JSX.Element;
+  children: React.JSX.Element;
 };
 
 const ComponentContent = (props: ComponentContentProps) => {
@@ -31,11 +26,12 @@ const ComponentContent = (props: ComponentContentProps) => {
   );
 };
 
-export const Default = (props: PageContentProps): JSX.Element => {
-  const { sitecoreContext } = useSitecoreContext();
+export const Default = (props: PageContentProps): React.JSX.Element => {
+  const { page } = useSitecore();
+  const routeContent = page.layout.sitecore.route?.fields?.Content as RichTextField | undefined;
   const id = props.params.RenderingIdentifier;
 
-  if (!(props.fields && props.fields.Content) && !sitecoreContext?.route?.fields?.Content) {
+  if (!(props.fields && props.fields.Content) && !routeContent) {
     return (
       <div className={`component content ${props.params.styles}`} id={id ? id : undefined}>
         <div className="component-content">
@@ -46,14 +42,12 @@ export const Default = (props: PageContentProps): JSX.Element => {
   }
 
   const field = (
-    props.fields && props.fields.Content
-      ? props.fields.Content
-      : sitecoreContext?.route?.fields?.Content
+    props.fields && props.fields.Content ? props.fields.Content : routeContent
   ) as RichTextField;
 
   return (
     <ComponentContent styles={props.params.styles} id={id}>
-      <JssRichText field={field} />
+      <RichText field={field} />
     </ComponentContent>
   );
 };

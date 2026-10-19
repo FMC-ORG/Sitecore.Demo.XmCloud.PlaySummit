@@ -1,4 +1,4 @@
-const RequireDatasource = (): JSX.Element => (
+const RequireDatasource = (): React.JSX.Element => (
   <div>This component requires a datasource. Please configure one.</div>
 );
 

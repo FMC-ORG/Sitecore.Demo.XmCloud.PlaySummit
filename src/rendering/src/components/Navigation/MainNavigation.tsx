@@ -1,11 +1,9 @@
 import Link from 'next/link';
-import React, { useState } from 'react';
-import { ImageField, Image } from '@sitecore-jss/sitecore-jss-nextjs';
+import { useState } from 'react';
+import { ImageField, Image } from '@sitecore-content-sdk/nextjs';
 import { ComponentProps } from 'lib/component-props';
-import { isCommerceEnabled } from '../../helpers/CommerceHelper';
 import { useI18n } from 'next-localization';
-import PreviewSearchWidget from '../PreviewSearchContent/PreviewSearchContent';
-import { isSearchSDKEnabled } from '../../services/SearchSDKService';
+import { isXmcDemoLink } from 'src/helpers/XmcDemoNavigation';
 
 export type MainNavigationProps = ComponentProps & {
   fields: {
@@ -33,7 +31,7 @@ export type MainNavigationProps = ComponentProps & {
                   };
                 };
               };
-            }
+            },
           ];
         };
       };
@@ -41,17 +39,11 @@ export type MainNavigationProps = ComponentProps & {
   };
 };
 
-const MainNavigation = (props: MainNavigationProps): JSX.Element => {
+const MainNavigation = (props: MainNavigationProps): React.JSX.Element => {
   const [navbarOpen, setNavbarOpen] = useState(false);
   const { t } = useI18n();
 
   const sxaStyles = `${props.params?.styles || ''}`;
-
-  const shopLink = isCommerceEnabled && (
-    <li className="text-menu-item">
-      <Link href="/shop">Shop</Link>
-    </li>
-  );
 
   return (
     <nav className={`main-navigation ${sxaStyles}`}>
@@ -59,8 +51,8 @@ const MainNavigation = (props: MainNavigationProps): JSX.Element => {
         <div className="controls-container container">
           <Link href="/" className="logo-link">
             <Image
-              field={props.fields.data.item.headerLogo.jsonValue}
-              alt={props.fields.data.item.headerLogo.alt}
+              field={props.fields?.data?.item?.headerLogo?.jsonValue}
+              alt={props.fields?.data?.item?.headerLogo?.alt}
             />
           </Link>
           <button
@@ -80,25 +72,21 @@ const MainNavigation = (props: MainNavigationProps): JSX.Element => {
         </div>
         <div className={'items-container' + (navbarOpen ? ' opened' : ' closed')}>
           <ul className="container">
-            {props.fields?.data?.links?.children?.results?.map((item, index) => (
-              <li className="text-menu-item" key={index}>
-                <Link href={item.field?.jsonValue?.value?.href ?? '#'} prefetch={false}>
-                  {item.displayName}
-                </Link>
-              </li>
-            ))}
-            {shopLink}
+            {props.fields?.data?.links?.children?.results
+              ?.filter((item) => isXmcDemoLink(item.field?.jsonValue?.value?.href))
+              .map((item, index) => (
+                <li className="text-menu-item" key={index}>
+                  <Link href={item.field?.jsonValue?.value?.href ?? '#'} prefetch={false}>
+                    {item.displayName}
+                  </Link>
+                </li>
+              ))}
             <li className="button-menu-item">
               <Link href="/tickets" className="btn-main">
                 {t('Book Tickets') || 'Book Tickets'}
               </Link>
             </li>
           </ul>
-          {isSearchSDKEnabled && (
-            <div className="search-input-container">
-              <PreviewSearchWidget rfkId="rfkid_6" />
-            </div>
-          )}
         </div>
       </div>
     </nav>

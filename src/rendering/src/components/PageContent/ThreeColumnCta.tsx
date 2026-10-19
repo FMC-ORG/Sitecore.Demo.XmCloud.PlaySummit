@@ -1,4 +1,4 @@
-import { Text, Field, withDatasourceCheck } from '@sitecore-jss/sitecore-jss-nextjs';
+import { Text, Field, withDatasourceCheck } from '@sitecore-content-sdk/nextjs';
 import { ComponentProps } from 'lib/component-props';
 
 type ThreeColumnCtaProps = ComponentProps & {
@@ -12,7 +12,7 @@ type ThreeColumnCtaProps = ComponentProps & {
   };
 };
 
-const ThreeColumnCta = (props: ThreeColumnCtaProps): JSX.Element => {
+const ThreeColumnCta = (props: ThreeColumnCtaProps): React.JSX.Element => {
   const sxaStyles = `${props.params?.styles || ''}`;
 
   return (

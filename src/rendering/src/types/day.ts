@@ -1,4 +1,4 @@
-import { Field } from '@sitecore-jss/sitecore-jss-nextjs';
+import { Field } from '@sitecore-content-sdk/nextjs';
 
 export type Day = {
   fields: {

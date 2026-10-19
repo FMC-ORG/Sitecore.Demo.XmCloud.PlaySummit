@@ -1,11 +1,5 @@
 import Link from 'next/link';
-import {
-  Text,
-  Image,
-  withDatasourceCheck,
-  useSitecoreContext,
-  LayoutServicePageState,
-} from '@sitecore-jss/sitecore-jss-nextjs';
+import { Text, Image, withDatasourceCheck, useSitecore } from '@sitecore-content-sdk/nextjs';
 import { ComponentProps } from 'lib/component-props';
 import { Vendor } from 'src/types/vendor';
 import { getPublicAssetUrl } from '../../../src/helpers/PublicUrlHelper';
@@ -16,11 +10,11 @@ type VendorsGridProps = ComponentProps & {
   };
 };
 
-const VendorsGrid = (props: VendorsGridProps): JSX.Element => {
-  const { sitecoreContext } = useSitecoreContext();
+const VendorsGrid = (props: VendorsGridProps): React.JSX.Element => {
+  const { page } = useSitecore();
 
   const publicUrl = getPublicAssetUrl();
-  const isPageEditing = sitecoreContext.pageState === LayoutServicePageState.Edit;
+  const isPageEditing = page.mode.isEditing;
   const hasVendors = !!props.fields;
 
   !hasVendors && console.warn('Missing Datasource Item');
@@ -29,13 +23,18 @@ const VendorsGrid = (props: VendorsGridProps): JSX.Element => {
     <p>Missing Datasource Item</p>
   );
 
-  const vendors =
-    props.fields?.items &&
-    props.fields.items.map((vendor, index) => (
+  const vendors = (props.fields?.items ?? [])
+    .filter((vendor) => vendor?.url)
+    .map((vendor, index) => (
       <Link key={index} href={vendor.url} passHref className="grid-item">
-        <Image field={vendor.fields.Logo} alt={vendor.fields.Name.value} width={265} height={265} />
+        <Image
+          field={vendor.fields?.Logo}
+          alt={vendor.fields?.Name?.value}
+          width={265}
+          height={265}
+        />
         <div className="item-details">
-          <Text tag="p" field={vendor.fields.Name} />
+          <Text tag="p" field={vendor.fields?.Name} />
         </div>
       </Link>
     ));

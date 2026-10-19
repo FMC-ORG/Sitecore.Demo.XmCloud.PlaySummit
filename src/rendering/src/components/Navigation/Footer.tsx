@@ -1,8 +1,9 @@
 import Link from 'next/link';
-import { ImageField, Image } from '@sitecore-jss/sitecore-jss-nextjs';
+import { ImageField, Image } from '@sitecore-content-sdk/nextjs';
 import { ComponentProps } from 'lib/component-props';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { useI18n } from 'next-localization';
+import { isXmcDemoLink } from 'src/helpers/XmcDemoNavigation';
 
 export type FooterProps = ComponentProps & {
   fields: {
@@ -40,10 +41,10 @@ export type FooterProps = ComponentProps & {
                         };
                       };
                     };
-                  }
+                  },
                 ];
               };
-            }
+            },
           ];
         };
       };
@@ -61,7 +62,7 @@ const socialIcons = {
 };
 */
 
-const Footer = (props: FooterProps): JSX.Element => {
+const Footer = (props: FooterProps): React.JSX.Element => {
   const newDate = new Date();
   const sxaStyles = `${props.params?.styles || ''}`;
   const { t } = useI18n();
@@ -71,8 +72,8 @@ const Footer = (props: FooterProps): JSX.Element => {
       <div className="footer-banner">
         <Link href="/">
           <Image
-            field={props.fields?.data.item.footerLogo.jsonValue}
-            alt={props.fields?.data.item.footerLogo.alt}
+            field={props.fields?.data?.item?.footerLogo?.jsonValue}
+            alt={props.fields?.data?.item?.footerLogo?.alt}
             loading="lazy"
           />
         </Link>
@@ -81,18 +82,20 @@ const Footer = (props: FooterProps): JSX.Element => {
         {props.fields?.data?.links?.children?.results?.map((item, index) => (
           <ul key={index} className="footer-content-col">
             <li>{item.displayName}</li>
-            {item.children.results.map((footerLink, footerLinkIndex) => (
-              <li key={footerLinkIndex}>
-                {/* Commenting out cause of error: Element implicitly has an 'any' type because expression of type 'string' can't be used to index type 
+            {item.children?.results
+              ?.filter((footerLink) => isXmcDemoLink(footerLink.field?.jsonValue?.value?.href))
+              .map((footerLink, footerLinkIndex) => (
+                <li key={footerLinkIndex}>
+                  {/* Commenting out cause of error: Element implicitly has an 'any' type because expression of type 'string' can't be used to index type
                 {footerLink.icon.value && (
                   <FontAwesomeIcon icon={socialIcons[footerLink.displayName.toLowerCase()]} />
                 )}
                 */}
-                <Link href={footerLink.field?.jsonValue?.value?.href ?? '#'}>
-                  {footerLink.title.value ? footerLink.title.value : footerLink.displayName}
-                </Link>
-              </li>
-            ))}
+                  <Link href={footerLink.field?.jsonValue?.value?.href ?? '#'}>
+                    {footerLink.title?.value || footerLink.displayName}
+                  </Link>
+                </li>
+              ))}
           </ul>
         ))}
       </footer>

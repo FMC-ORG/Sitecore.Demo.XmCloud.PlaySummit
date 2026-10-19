@@ -1,4 +1,3 @@
-import React from 'react';
 import { ComponentProps } from 'lib/component-props';
 
 function formatBreadcrumb(text: string) {
@@ -42,13 +41,11 @@ function getBreadcrumbUrl(propItem: contextItem) {
   return propItem?.url?.path;
 }
 
-const Breadcrumb = (props: BreadcrumbProps): JSX.Element => {
-  if (props?.fields?.data?.item === null) {
-    return <div></div>;
-  }
+const Breadcrumb = (props: BreadcrumbProps): React.JSX.Element => {
+  const propItem = props.fields?.data?.item;
+  if (!propItem) return <div />;
 
-  const propItem = props.fields.data.item;
-  const propItemAncestors = props.fields.data.item.ancestors;
+  const propItemAncestors = propItem.ancestors;
   const breadcrumbs = [];
 
   const sxaStyles = `${props.params?.styles || ''}`;

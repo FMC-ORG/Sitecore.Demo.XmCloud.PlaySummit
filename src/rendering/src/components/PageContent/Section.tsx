@@ -5,18 +5,21 @@ import {
   Link,
   Placeholder,
   LinkField,
-} from '@sitecore-jss/sitecore-jss-nextjs';
+  FieldMetadata,
+  useSitecore,
+} from '@sitecore-content-sdk/nextjs';
 import { ComponentWithChildrenProps } from 'lib/component-props';
 
 type SectionProps = ComponentWithChildrenProps & {
   fields: {
     title: Field<string>;
     content: Field<string>;
-    callToActionLink: LinkField;
+    callToActionLink: LinkField & FieldMetadata;
   };
 };
 
-const Section = (props: SectionProps): JSX.Element => {
+const Section = (props: SectionProps): React.JSX.Element => {
+  const { page } = useSitecore();
   const sxaStyles = `${props.params?.styles || ''}`;
 
   const titleAndContent = props.fields && (
@@ -32,7 +35,8 @@ const Section = (props: SectionProps): JSX.Element => {
     <Placeholder name="jss-section-content" rendering={props.rendering} />
   );
 
-  const callToAction = !!props.fields?.callToActionLink?.value?.href && (
+  const callToAction = (props.fields?.callToActionLink?.value?.href ||
+    (page.mode.isEditing && props.fields?.callToActionLink?.metadata)) && (
     <Link field={props.fields.callToActionLink} className="btn-main" />
   );
 

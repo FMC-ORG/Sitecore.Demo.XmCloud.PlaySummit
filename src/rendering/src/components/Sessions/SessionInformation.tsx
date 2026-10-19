@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { ComponentWithChildrenProps } from 'lib/component-props';
-import { Field, ImageField, Placeholder, RichText } from '@sitecore-jss/sitecore-jss-nextjs';
+import { Field, ImageField, Placeholder, RichText } from '@sitecore-content-sdk/nextjs';
 import { Timeslot } from '../../interfaces/Timeslot';
 import { Speaker } from 'src/types/speaker';
 import { Day } from 'src/types/day';
@@ -22,8 +22,8 @@ export type SessionInformationProps = ComponentWithChildrenProps & {
   };
 };
 
-const SessionInformation = (props: SessionInformationProps): JSX.Element => {
-  const premiumSessionMetaValue = props.fields.Premium?.value ? 'true' : 'false';
+const SessionInformation = (props: SessionInformationProps): React.JSX.Element => {
+  const premiumSessionMetaValue = props.fields?.Premium?.value ? 'true' : 'false';
   const sxaStyles = `${props.params?.styles || ''}`;
   const { t } = useI18n();
 
@@ -37,7 +37,7 @@ const SessionInformation = (props: SessionInformationProps): JSX.Element => {
         <meta name="premiumSession" content={premiumSessionMetaValue} />
         <meta property="og:description" content={removeTags(props.fields?.Description?.value)} />
         <meta property="og:title" content={props.fields?.Name?.value} />
-        <meta property="og:image" content={props.fields?.Image?.value.src} />
+        <meta property="og:image" content={props.fields?.Image?.value?.src} />
         <meta property="og:type" content="session" />
       </Head>
       <section className={`section information-section ${sxaStyles}`}>

@@ -1,4 +1,3 @@
-import React from 'react';
 import { StoryFn, Meta } from '@storybook/react';
 
 import { Default as RequestInfoForm } from '../../components/Forms/RequestInfoForm';

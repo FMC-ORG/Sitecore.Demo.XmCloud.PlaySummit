@@ -1,0 +1,806 @@
+[
+  {
+    "source": "src/rendering/package.json",
+    "archive": "legacy/jss-infrastructure/package.json",
+    "action": "snapshot",
+    "sha256": "f5ace8802169ba8cc83a890a9804d8e1d201ecee2eb5db9984ca36bf57dd470b"
+  },
+  {
+    "source": "src/rendering/next.config.js",
+    "archive": "legacy/jss-infrastructure/next.config.js",
+    "action": "snapshot",
+    "sha256": "12093759bf75cdba6d1dd9b23d453a2e39afba38b79ac3db94151d5dc457bb45"
+  },
+  {
+    "source": "src/rendering/tsconfig.json",
+    "archive": "legacy/jss-infrastructure/tsconfig.json",
+    "action": "snapshot",
+    "sha256": "ded5dddc2d0f9900c4c02e13488516b6914d9523699e6739e64c9ee789d9df2a"
+  },
+  {
+    "source": "src/rendering/.storybook/main.js",
+    "archive": "legacy/jss-infrastructure/.storybook/main.js",
+    "action": "snapshot",
+    "sha256": "d620ef964f1397fc884bdbedec59e40fbf69c1b5fc259ad27fc4819eead0272b"
+  },
+  {
+    "source": "src/rendering/.storybook/preview.js",
+    "archive": "legacy/jss-infrastructure/.storybook/preview.js",
+    "action": "snapshot",
+    "sha256": "93408d6967fe014676c6da32023341602ea8c4244e2974df6c5a2224a0ed7642"
+  },
+  {
+    "source": "src/rendering/.eslintrc",
+    "archive": "legacy/jss-infrastructure/.eslintrc",
+    "action": "snapshot",
+    "sha256": "bdd96cb6569d0c9d8c617aa6313e056ad4e22407970c18b6470c5473ada0c0c1"
+  },
+  {
+    "source": "src/rendering/src/Bootstrap.tsx",
+    "archive": "legacy/jss-infrastructure/src/Bootstrap.tsx",
+    "action": "snapshot",
+    "sha256": "9d3b9dd44b8020d4eebb137e52e98b38db8f4122f8eb6ee1a8ec94bb7268201a"
+  },
+  {
+    "source": "src/rendering/src/Layout.tsx",
+    "archive": "legacy/jss-infrastructure/src/Layout.tsx",
+    "action": "snapshot",
+    "sha256": "e69e95671ae4ce6b70cf36475965ecc336cc0f74f3c194519a78c9131553a6bb"
+  },
+  {
+    "source": "src/rendering/src/Scripts.tsx",
+    "archive": "legacy/jss-infrastructure/src/Scripts.tsx",
+    "action": "snapshot",
+    "sha256": "7fe0be0af6242c8fa7b8e6fd5ec6e6b3050c74076d96c939323f6e91dc255e64"
+  },
+  {
+    "source": "src/rendering/src/byoc/index.tsx",
+    "archive": "legacy/jss-infrastructure/src/byoc/index.tsx",
+    "action": "snapshot",
+    "sha256": "192f0daed9b661fc5201e436731435931c30daffde793f7ea58d18063b181fe6"
+  },
+  {
+    "source": "src/rendering/src/byoc/index.client.tsx",
+    "archive": "legacy/jss-infrastructure/src/byoc/index.client.tsx",
+    "action": "snapshot",
+    "sha256": "3837ac00653eb4aa82bd7162008c20bab7cb3850d3296b579716e2887579f919"
+  },
+  {
+    "source": "src/rendering/src/pages/_app.tsx",
+    "archive": "legacy/jss-infrastructure/src/pages/_app.tsx",
+    "action": "snapshot",
+    "sha256": "9030ee18c71933a400af96aa3d3adad90792e3d360bd5593b4059e92afe05474"
+  },
+  {
+    "source": "src/rendering/src/pages/[[...path]].tsx",
+    "archive": "legacy/jss-infrastructure/src/pages/[[...path]].tsx",
+    "action": "snapshot",
+    "sha256": "fa6ab73e44dccf0cf7bde7e87a8284edd01154bee0d43aaea4b71b09e6955b48"
+  },
+  {
+    "source": "src/rendering/src/pages/404.tsx",
+    "archive": "legacy/jss-infrastructure/src/pages/404.tsx",
+    "action": "snapshot",
+    "sha256": "9d1047e13a8a73718791e07b7b2983e7a933dfc33aaaa2ec985e116038b99bab"
+  },
+  {
+    "source": "src/rendering/src/pages/500.tsx",
+    "archive": "legacy/jss-infrastructure/src/pages/500.tsx",
+    "action": "snapshot",
+    "sha256": "1c64ded6bf7cdbaebbfa013dfecbfc27a31b03b8394df15c335167c593b671a0"
+  },
+  {
+    "source": "src/rendering/src/services/CloudSDKService.ts",
+    "archive": "legacy/jss-infrastructure/src/services/CloudSDKService.ts",
+    "action": "snapshot",
+    "sha256": "52110b35bd8e5b75aad7a6f0ea64b09421fd48869c8e6a1b0b71ab3253174fe3"
+  },
+  {
+    "source": "src/rendering/src/components/nextjs-sxa/CdpPageView.tsx",
+    "archive": "legacy/jss-infrastructure/src/components/nextjs-sxa/CdpPageView.tsx",
+    "action": "snapshot",
+    "sha256": "31696beaf3e1efbeabf9ad1f0e2b1181db2fe33faa38b40287f90c71ef336ffd"
+  },
+  {
+    "source": "src/rendering/src/pages/api/editing/config.ts",
+    "archive": "legacy/jss-infrastructure/src/pages/api/editing/config.ts",
+    "action": "snapshot",
+    "sha256": "1a7a33242b43e0fbb308bd6e3e79b75f56d9dde75c91aea104a59292a4bc665c"
+  },
+  {
+    "source": "src/rendering/src/pages/api/editing/render.ts",
+    "archive": "legacy/jss-infrastructure/src/pages/api/editing/render.ts",
+    "action": "snapshot",
+    "sha256": "f1320ee33d0a44511ff6b2d46e8910d6e9d7af8f1ad5ce5aac177eecec2991ad"
+  },
+  {
+    "source": "src/rendering/src/pages/api/editing/feaas/render.ts",
+    "archive": "legacy/jss-infrastructure/src/pages/api/editing/feaas/render.ts",
+    "action": "snapshot",
+    "sha256": "0e9d2df82d22563b9808285236e0e5470d26577c5fda970138990e32f3ab1d05"
+  },
+  {
+    "source": "src/rendering/src/pages/api/sitemap.ts",
+    "archive": "legacy/jss-infrastructure/src/pages/api/sitemap.ts",
+    "action": "snapshot",
+    "sha256": "5d256cb916f99edad8259efe59b462a1fb00476fe8cc5c1b57cd1eb264808417"
+  },
+  {
+    "source": "src/rendering/src/pages/api/robots.ts",
+    "archive": "legacy/jss-infrastructure/src/pages/api/robots.ts",
+    "action": "snapshot",
+    "sha256": "79aacaa668fcf63fdd549de50ce13351d3c540b7c0adbe5b93ed47ccc946ec38"
+  },
+  {
+    "source": "src/rendering/src/pages/api/healthz.ts",
+    "archive": "legacy/jss-infrastructure/src/pages/api/healthz.ts",
+    "action": "snapshot",
+    "sha256": "1a883ff3123e75b3e95d367bc8fa2c6116ad7aa2af30a0116ece8ed5741de273"
+  },
+  {
+    "source": "src/rendering/scripts/generate-metadata.ts",
+    "archive": "legacy/jss-infrastructure/scripts/generate-metadata.ts",
+    "action": "move",
+    "sha256": "3e2a795f432fff306fbef8fb1db2b35d5687700a639970c49ed3e7cecc0a5271"
+  },
+  {
+    "source": "src/rendering/scripts/fetch-graphql-introspection-data.ts",
+    "archive": "legacy/jss-infrastructure/scripts/fetch-graphql-introspection-data.ts",
+    "action": "move",
+    "sha256": "8d1aea9aa1574bf4057cc56bac5cdc65acc1319d11b6440613dfeac995984fb2"
+  },
+  {
+    "source": "src/rendering/scripts/generate-config.ts",
+    "archive": "legacy/jss-infrastructure/scripts/generate-config.ts",
+    "action": "move",
+    "sha256": "a703324bb5f0fd6f083b4bdf00a9d7bcb111423a566c7c2ebde76068315d597a"
+  },
+  {
+    "source": "src/rendering/scripts/generate-plugins.ts",
+    "archive": "legacy/jss-infrastructure/scripts/generate-plugins.ts",
+    "action": "move",
+    "sha256": "e143fdc21a50cd1187b4101a792f2a65f90c20d9871e55dac35b851cc4fcba43"
+  },
+  {
+    "source": "src/rendering/scripts/utils.ts",
+    "archive": "legacy/jss-infrastructure/scripts/utils.ts",
+    "action": "move",
+    "sha256": "91685c80b99bc1b7752a20fae5b55caef24c8183c419ab49140c4f046a7f7838"
+  },
+  {
+    "source": "src/rendering/scripts/install-pre-push-hook.ts",
+    "archive": "legacy/jss-infrastructure/scripts/install-pre-push-hook.ts",
+    "action": "move",
+    "sha256": "6b60b47bd6410db0fc4e3879d62c0258a1cbb19f4a938bfcc7bd8234a2a9a249"
+  },
+  {
+    "source": "src/rendering/scripts/bootstrap.ts",
+    "archive": "legacy/jss-infrastructure/scripts/bootstrap.ts",
+    "action": "move",
+    "sha256": "0247551064ade5219f6886143fa33b765d85b917476744fd293e7617f37a2530"
+  },
+  {
+    "source": "src/rendering/scripts/temp/config-plugins.ts",
+    "archive": "legacy/jss-infrastructure/scripts/temp/config-plugins.ts",
+    "action": "move",
+    "sha256": "787c74b03a69af78a0f3ea193079ecd3c50d1b890cc26e0605dc0688e4f8c6bb"
+  },
+  {
+    "source": "src/rendering/scripts/temp/.gitignore",
+    "archive": "legacy/jss-infrastructure/scripts/temp/.gitignore",
+    "action": "move",
+    "sha256": "240a3e0d37d2e86b614063f5347eb02d4f99ca6c254de6b82871ff8d95532a7d"
+  },
+  {
+    "source": "src/rendering/scripts/temp/generate-component-builder-plugins.ts",
+    "archive": "legacy/jss-infrastructure/scripts/temp/generate-component-builder-plugins.ts",
+    "action": "move",
+    "sha256": "f7968f8f1c15e3f05e759cd0b7a74d24873abb369bfb28c8580bb24612cd17a5"
+  },
+  {
+    "source": "src/rendering/scripts/config/index.ts",
+    "archive": "legacy/jss-infrastructure/scripts/config/index.ts",
+    "action": "move",
+    "sha256": "e6899a47665b022429a479568fe68966f08b96564d3c9c4220b06120352dceb1"
+  },
+  {
+    "source": "src/rendering/scripts/scaffold-component/index.ts",
+    "archive": "legacy/jss-infrastructure/scripts/scaffold-component/index.ts",
+    "action": "move",
+    "sha256": "5e7cd4eace33a2d00113722bbb753639efcd7c8024924ebe5d5fd3d0af79c48e"
+  },
+  {
+    "source": "src/rendering/scripts/templates/story-src.ts",
+    "archive": "legacy/jss-infrastructure/scripts/templates/story-src.ts",
+    "action": "move",
+    "sha256": "e4ae02c60a9f15c3d02e37e42035439c08896b9bc1d3fbc4e680eacda2dc1244"
+  },
+  {
+    "source": "src/rendering/scripts/templates/component-src.ts",
+    "archive": "legacy/jss-infrastructure/scripts/templates/component-src.ts",
+    "action": "move",
+    "sha256": "ee1059544d53cc8f1a2b00c228fd61404c435b38c36a538fd1c263ecc5e69b4f"
+  },
+  {
+    "source": "src/rendering/scripts/templates/byoc-component-src.ts",
+    "archive": "legacy/jss-infrastructure/scripts/templates/byoc-component-src.ts",
+    "action": "move",
+    "sha256": "b99208914ea7534833d40d352bb09aa77bfe832cc49bbfe7f3d19623995cff70"
+  },
+  {
+    "source": "src/rendering/scripts/generate-component-builder/index.ts",
+    "archive": "legacy/jss-infrastructure/scripts/generate-component-builder/index.ts",
+    "action": "move",
+    "sha256": "0d34d68b7069853d2983b7235e51baa1807b1c982b84fe8ccd85beda6e97c475"
+  },
+  {
+    "source": "src/rendering/scripts/config/plugins/sxa.ts",
+    "archive": "legacy/jss-infrastructure/scripts/config/plugins/sxa.ts",
+    "action": "move",
+    "sha256": "9d5dd1b7bbd761d44f8a0359c4bfa34a136679b061e6d3372012076f44e4ebe2"
+  },
+  {
+    "source": "src/rendering/scripts/config/plugins/scjssconfig.ts",
+    "archive": "legacy/jss-infrastructure/scripts/config/plugins/scjssconfig.ts",
+    "action": "move",
+    "sha256": "875b9523701a403484baa43a12b574e60007e536ac16305c5e7277eafd78e29a"
+  },
+  {
+    "source": "src/rendering/scripts/config/plugins/multisite.ts",
+    "archive": "legacy/jss-infrastructure/scripts/config/plugins/multisite.ts",
+    "action": "move",
+    "sha256": "2b17093916715828853d78c7a0cd3e117ac4fc3f2ffa2c254d48991490508871"
+  },
+  {
+    "source": "src/rendering/scripts/config/plugins/package-json.ts",
+    "archive": "legacy/jss-infrastructure/scripts/config/plugins/package-json.ts",
+    "action": "move",
+    "sha256": "b706212c0eb4ab1b893ffebfd9b2ce1600fb7296542519a5f2443cce5ffb7bfa"
+  },
+  {
+    "source": "src/rendering/scripts/config/plugins/fallback.ts",
+    "archive": "legacy/jss-infrastructure/scripts/config/plugins/fallback.ts",
+    "action": "move",
+    "sha256": "e7dabe2abd8e001c96c471c82276375e30ccbda918b5579f5b57ca9d412b22bf"
+  },
+  {
+    "source": "src/rendering/scripts/config/plugins/edge-platform.ts",
+    "archive": "legacy/jss-infrastructure/scripts/config/plugins/edge-platform.ts",
+    "action": "move",
+    "sha256": "f27953a6d9d6533c3c43262f6964a135d5e3a3803bcd7cf5abd314b9e7ca527a"
+  },
+  {
+    "source": "src/rendering/scripts/config/plugins/computed.ts",
+    "archive": "legacy/jss-infrastructure/scripts/config/plugins/computed.ts",
+    "action": "move",
+    "sha256": "8d91ba96f8d54856fbd8850b9db642d89631719f0baa9ac6d91dddc23f316ae2"
+  },
+  {
+    "source": "src/rendering/scripts/scaffold-component/plugins/byoc.ts",
+    "archive": "legacy/jss-infrastructure/scripts/scaffold-component/plugins/byoc.ts",
+    "action": "move",
+    "sha256": "dbaa79b732fe88be4b31753a7dee1dc932225b85a118939b889f7f42f113e0e0"
+  },
+  {
+    "source": "src/rendering/scripts/scaffold-component/plugins/component.ts",
+    "archive": "legacy/jss-infrastructure/scripts/scaffold-component/plugins/component.ts",
+    "action": "move",
+    "sha256": "c4609bd3c25238c40f5f07d96f95e9bf04e0bf59345ba8876f082958c3f8474c"
+  },
+  {
+    "source": "src/rendering/scripts/scaffold-component/plugins/next-steps.ts",
+    "archive": "legacy/jss-infrastructure/scripts/scaffold-component/plugins/next-steps.ts",
+    "action": "move",
+    "sha256": "6e4fc7fdb88f9772e6d103354565ddb403ee33aac84962b1b4eda2903d845719"
+  },
+  {
+    "source": "src/rendering/scripts/scaffold-component/plugins/next-steps-byoc.ts",
+    "archive": "legacy/jss-infrastructure/scripts/scaffold-component/plugins/next-steps-byoc.ts",
+    "action": "move",
+    "sha256": "51ed67e6ee930907612287bbf7ddeafa3fd5ca26959c6ee60884a938bca9d3c1"
+  },
+  {
+    "source": "src/rendering/scripts/scaffold-component/plugins/storybook.ts",
+    "archive": "legacy/jss-infrastructure/scripts/scaffold-component/plugins/storybook.ts",
+    "action": "move",
+    "sha256": "c0866cb64bc10d2d4832141368f07860007f25cedda6a2b0b9244c025784d600"
+  },
+  {
+    "source": "src/rendering/scripts/generate-component-builder/plugins/feaas.ts",
+    "archive": "legacy/jss-infrastructure/scripts/generate-component-builder/plugins/feaas.ts",
+    "action": "move",
+    "sha256": "81f37f83ea2fb38e6c2d8d38ef2a65f0e17c9fd067566c43dd6fc965dfdec20d"
+  },
+  {
+    "source": "src/rendering/scripts/generate-component-builder/plugins/component-builder.ts",
+    "archive": "legacy/jss-infrastructure/scripts/generate-component-builder/plugins/component-builder.ts",
+    "action": "move",
+    "sha256": "315b923638ae5e6b12dd888d62bbe76520ee2eaef3aa689ca7fb07f2514fbc56"
+  },
+  {
+    "source": "src/rendering/scripts/generate-component-builder/plugins/packages.ts",
+    "archive": "legacy/jss-infrastructure/scripts/generate-component-builder/plugins/packages.ts",
+    "action": "move",
+    "sha256": "0b634c22f1bf1bc11b7cd86ca752419e460a8474f7ef5ffe8aafa889a7d54418"
+  },
+  {
+    "source": "src/rendering/scripts/generate-component-builder/plugins/components.ts",
+    "archive": "legacy/jss-infrastructure/scripts/generate-component-builder/plugins/components.ts",
+    "action": "move",
+    "sha256": "bb30f33333781c03db38247a06ce2b30a3adf214a8ce32d692c35f552a69ea90"
+  },
+  {
+    "source": "src/rendering/tsconfig.scripts.json",
+    "archive": "legacy/jss-infrastructure/tsconfig.scripts.json",
+    "action": "move",
+    "sha256": "8a6ad1105165f72f08494f4cb8f11bac2ed49ce24843c1e43ae374e4b8c97688"
+  },
+  {
+    "source": "src/rendering/.graphql-let.yml",
+    "archive": "legacy/jss-infrastructure/.graphql-let.yml",
+    "action": "move",
+    "sha256": "aab8e1a15b3ed241fb31e840afa978b9b3039070fa34fc1d18affc8a32e07a73"
+  },
+  {
+    "source": "src/rendering/src/lib/page-props-factory/index.ts",
+    "archive": "legacy/jss-infrastructure/src/lib/page-props-factory/index.ts",
+    "action": "move",
+    "sha256": "7ff5f362ae043e57746199b794e4a92cf33b1687ee29b5d38551433f96bebc83"
+  },
+  {
+    "source": "src/rendering/src/lib/page-props-factory/plugins/component-props.ts",
+    "archive": "legacy/jss-infrastructure/src/lib/page-props-factory/plugins/component-props.ts",
+    "action": "move",
+    "sha256": "c1f7c318346fb3b3b83d6875b370d257f3357464ba95f4686a31a7275d7d085c"
+  },
+  {
+    "source": "src/rendering/src/lib/page-props-factory/plugins/site.ts",
+    "archive": "legacy/jss-infrastructure/src/lib/page-props-factory/plugins/site.ts",
+    "action": "move",
+    "sha256": "c2a40b887166325471ac399b608a8b7490acd929e585176290fe89124e6aa2c7"
+  },
+  {
+    "source": "src/rendering/src/lib/page-props-factory/plugins/component-themes.ts",
+    "archive": "legacy/jss-infrastructure/src/lib/page-props-factory/plugins/component-themes.ts",
+    "action": "move",
+    "sha256": "b60b27e87e1602b2478dde66aa5c770a2a7bb23366eb593cf597221d0768bc1d"
+  },
+  {
+    "source": "src/rendering/src/lib/page-props-factory/plugins/personalize.ts",
+    "archive": "legacy/jss-infrastructure/src/lib/page-props-factory/plugins/personalize.ts",
+    "action": "move",
+    "sha256": "0d771a910661f1bfaf34eee7a79031004ba44c6ba09bcef168ccabfed85cc1ee"
+  },
+  {
+    "source": "src/rendering/src/lib/page-props-factory/plugins/normal-mode.ts",
+    "archive": "legacy/jss-infrastructure/src/lib/page-props-factory/plugins/normal-mode.ts",
+    "action": "move",
+    "sha256": "7e7ffa8255c3c5d73a47fd7d958a4e168bc3c079c00cb2a0e9dc80bfe03c70a2"
+  },
+  {
+    "source": "src/rendering/src/lib/page-props-factory/plugins/preview-mode.ts",
+    "archive": "legacy/jss-infrastructure/src/lib/page-props-factory/plugins/preview-mode.ts",
+    "action": "move",
+    "sha256": "ab374f280bd855aaf1436142bb3c66583682cc3f641a1c25166eea2ff01119cf"
+  },
+  {
+    "source": "src/rendering/src/lib/page-props-factory/plugins/content-styles.ts",
+    "archive": "legacy/jss-infrastructure/src/lib/page-props-factory/plugins/content-styles.ts",
+    "action": "move",
+    "sha256": "c96f787f2c76f07664db431c29d5e1dfb938a807884156f04e971771ddb3d57b"
+  },
+  {
+    "source": "src/rendering/src/lib/site-resolver/index.ts",
+    "archive": "legacy/jss-infrastructure/src/lib/site-resolver/index.ts",
+    "action": "move",
+    "sha256": "a8ee35e7b3585f899c8ef0cca4c49838851c8d9cc72198209aac6b5e36ec5043"
+  },
+  {
+    "source": "src/rendering/src/lib/site-resolver/plugins/default.ts",
+    "archive": "legacy/jss-infrastructure/src/lib/site-resolver/plugins/default.ts",
+    "action": "move",
+    "sha256": "3d81e3f7852c6524eb59960a7f234828deb7aaafc8e6f0bc1a09071e4d80d8cc"
+  },
+  {
+    "source": "src/rendering/src/lib/site-resolver/plugins/multisite.ts",
+    "archive": "legacy/jss-infrastructure/src/lib/site-resolver/plugins/multisite.ts",
+    "action": "move",
+    "sha256": "93fae2046fc0e8ef4b097d7d85acc49b0e8c42ea46626c54f1ad28bbed2fb3e5"
+  },
+  {
+    "source": "src/rendering/src/lib/extract-path/index.ts",
+    "archive": "legacy/jss-infrastructure/src/lib/extract-path/index.ts",
+    "action": "move",
+    "sha256": "ee8e7fb840a956c107f9f4e54f46b6c148d842abfb69443dbdc3582cea3acf64"
+  },
+  {
+    "source": "src/rendering/src/lib/extract-path/plugins/multisite.ts",
+    "archive": "legacy/jss-infrastructure/src/lib/extract-path/plugins/multisite.ts",
+    "action": "move",
+    "sha256": "8667ead0463769d710194ed74da6777d6638d9b34bc622e441d2299eec93ac4c"
+  },
+  {
+    "source": "src/rendering/src/lib/extract-path/plugins/personalize.ts",
+    "archive": "legacy/jss-infrastructure/src/lib/extract-path/plugins/personalize.ts",
+    "action": "move",
+    "sha256": "202993da556fb890195082b872f0a91ab358b21c5e533911ac489f311610873f"
+  },
+  {
+    "source": "src/rendering/src/lib/sitemap-fetcher/index.ts",
+    "archive": "legacy/jss-infrastructure/src/lib/sitemap-fetcher/index.ts",
+    "action": "move",
+    "sha256": "a0064883bdcf9a43c8d3953cdf39169dfd1a39a69afd49a61e9d1737e190daca"
+  },
+  {
+    "source": "src/rendering/src/lib/sitemap-fetcher/plugins/graphql-sitemap-service.ts",
+    "archive": "legacy/jss-infrastructure/src/lib/sitemap-fetcher/plugins/graphql-sitemap-service.ts",
+    "action": "move",
+    "sha256": "a3485fd0f7bf95c79958a8c8a197cbe0ff5fc41612e1464b8d881f4a4ad05e2e"
+  },
+  {
+    "source": "src/rendering/src/lib/middleware/index.ts",
+    "archive": "legacy/jss-infrastructure/src/lib/middleware/index.ts",
+    "action": "move",
+    "sha256": "1d95d2e738eb3958e5f19751c71f88f8818755294606e862e4eb5cb10a3d878a"
+  },
+  {
+    "source": "src/rendering/src/lib/middleware/plugins/redirects.ts",
+    "archive": "legacy/jss-infrastructure/src/lib/middleware/plugins/redirects.ts",
+    "action": "move",
+    "sha256": "f21307cc642eb71d76be14d3b3d3459b469ee76578dca6614367c7e5aa03f2b9"
+  },
+  {
+    "source": "src/rendering/src/lib/middleware/plugins/multisite.ts",
+    "archive": "legacy/jss-infrastructure/src/lib/middleware/plugins/multisite.ts",
+    "action": "move",
+    "sha256": "d855105be23ed7cb62fda9ca990b0725e3f8e7b3b334a238e7e98cdcbed32bde"
+  },
+  {
+    "source": "src/rendering/src/lib/middleware/plugins/personalize.ts",
+    "archive": "legacy/jss-infrastructure/src/lib/middleware/plugins/personalize.ts",
+    "action": "move",
+    "sha256": "fe2e64112a0e5994e881e9b17dc6c4239e2afd59cb239466912fb6e892c57ef4"
+  },
+  {
+    "source": "src/rendering/src/lib/next-config/plugins/cors-header.js",
+    "archive": "legacy/jss-infrastructure/src/lib/next-config/plugins/cors-header.js",
+    "action": "move",
+    "sha256": "4afeed598dea67d1da9332f2ed1d0798f413845b3994c9ae27f2bb1be73565c9"
+  },
+  {
+    "source": "src/rendering/src/lib/next-config/plugins/component-props.js",
+    "archive": "legacy/jss-infrastructure/src/lib/next-config/plugins/component-props.js",
+    "action": "move",
+    "sha256": "fcdc99dacfd5529301e8370a1bafea63529258b15443a0ada323a7c16b84d9f3"
+  },
+  {
+    "source": "src/rendering/src/lib/next-config/plugins/sitemap.js",
+    "archive": "legacy/jss-infrastructure/src/lib/next-config/plugins/sitemap.js",
+    "action": "move",
+    "sha256": "db9f36a0b22ae315bb26ac301ffb6292a77507ce9044d1e1536cc8e562782f7d"
+  },
+  {
+    "source": "src/rendering/src/lib/next-config/plugins/feaas.js",
+    "archive": "legacy/jss-infrastructure/src/lib/next-config/plugins/feaas.js",
+    "action": "move",
+    "sha256": "c0ecfd799a0287bad5b7bc7b82e959038efb2f6f3c826bf28cb6573a30ffc980"
+  },
+  {
+    "source": "src/rendering/src/lib/next-config/plugins/robots.js",
+    "archive": "legacy/jss-infrastructure/src/lib/next-config/plugins/robots.js",
+    "action": "move",
+    "sha256": "290a9cb360f2ce2b123c2b78c98124e4255d1f50e7e912a8397a3cf51d35c0a4"
+  },
+  {
+    "source": "src/rendering/src/lib/next-config/plugins/sass.js",
+    "archive": "legacy/jss-infrastructure/src/lib/next-config/plugins/sass.js",
+    "action": "move",
+    "sha256": "c92a113c42f510370891f6eff857b6d0084258356d59d9f2ff04f3229ce15f58"
+  },
+  {
+    "source": "src/rendering/src/lib/next-config/plugins/graphql.js",
+    "archive": "legacy/jss-infrastructure/src/lib/next-config/plugins/graphql.js",
+    "action": "move",
+    "sha256": "4d39d53847b4d8aa21e36438e1e4ab2ffe90b6de86c1143e69f46bdbc26f0f7d"
+  },
+  {
+    "source": "src/rendering/src/lib/graphql-client-factory/index.ts",
+    "archive": "legacy/jss-infrastructure/src/lib/graphql-client-factory/index.ts",
+    "action": "move",
+    "sha256": "17a1eb2b8bbe2c75db428777d05e72ccfafd9edcff8b227457d5499b7a40493d"
+  },
+  {
+    "source": "src/rendering/src/lib/graphql-client-factory/create.ts",
+    "archive": "legacy/jss-infrastructure/src/lib/graphql-client-factory/create.ts",
+    "action": "move",
+    "sha256": "2685d409aaff1161a1f4ea12ebeca50b4a9e2c4d18709abc18fe2e8332006a52"
+  },
+  {
+    "source": "src/rendering/src/lib/dictionary-service-factory.ts",
+    "archive": "legacy/jss-infrastructure/src/lib/dictionary-service-factory.ts",
+    "action": "move",
+    "sha256": "0bd85a8ed8d6c36a83a5d951f52d5f721dc9acd5cf94489a853482a6841c5463"
+  },
+  {
+    "source": "src/rendering/src/lib/layout-service-factory.ts",
+    "archive": "legacy/jss-infrastructure/src/lib/layout-service-factory.ts",
+    "action": "move",
+    "sha256": "8e2632f99a930eff8f23d3fd78a9244d80562e22c2ef43e98685a789ccdde205"
+  },
+  {
+    "source": "src/rendering/src/lib/graphql-editing-service.ts",
+    "archive": "legacy/jss-infrastructure/src/lib/graphql-editing-service.ts",
+    "action": "move",
+    "sha256": "eb59594b9ed69930c50ebe5d8851c968ec9eb8c6655f8544cb29110ad0015d42"
+  },
+  {
+    "source": "src/rendering/src/lib/page-props.ts",
+    "archive": "legacy/jss-infrastructure/src/lib/page-props.ts",
+    "action": "move",
+    "sha256": "502717e1d8e92daf8597a0028251df9bf758f5e39972628a42ec0e96a05514da"
+  },
+  {
+    "source": "src/rendering/src/lib/config.ts",
+    "archive": "legacy/jss-infrastructure/src/lib/config.ts",
+    "action": "move",
+    "sha256": "eccdedb55655f77b34b0a77645cfb7088f3eb01ef4caddce9b8f03d4e05676b6"
+  },
+  {
+    "source": "src/rendering/src/middleware.ts",
+    "archive": "legacy/jss-infrastructure/src/middleware.ts",
+    "action": "move",
+    "sha256": "d7ad8f2e0652f8b2a038fa904bfb9cb7b92c5d19b18e1103979b060687aa92e3"
+  },
+  {
+    "source": "src/rendering/src/pages/api/editing/data/[key].ts",
+    "archive": "legacy/jss-infrastructure/src/pages/api/editing/data/[key].ts",
+    "action": "move",
+    "sha256": "d103bd885727c2bfaa2bce676ca0e426a6b26ab797a573ca443d9ba4341a683c"
+  },
+  {
+    "source": "src/rendering/src/temp/GraphQLIntrospectionResult.json",
+    "archive": "legacy/jss-infrastructure/src/temp/GraphQLIntrospectionResult.json",
+    "action": "move",
+    "sha256": "1045391de6758a5ba33e0baadfe7ae549277e7e63a47ff9d7821fac3e331b611"
+  },
+  {
+    "source": "src/rendering/src/components/Forms/AttendeeForm.tsx",
+    "archive": "legacy/jss-infrastructure/src/components/Forms/AttendeeForm.tsx",
+    "action": "snapshot",
+    "sha256": "6bc0b0d3ca46724ab73345740685c991c3a9fe507c9f66f614dbf765dbebe6cc"
+  },
+  {
+    "source": "src/rendering/src/components/Navigation/Breadcrumb.tsx",
+    "archive": "legacy/jss-infrastructure/src/components/Navigation/Breadcrumb.tsx",
+    "action": "snapshot",
+    "sha256": "212f72a32eb4d9f4910ddddf1d335185881870b02bb2f1db49541ee5b5ac94c8"
+  },
+  {
+    "source": "src/rendering/src/components/Navigation/MainNavigation.tsx",
+    "archive": "legacy/jss-infrastructure/src/components/Navigation/MainNavigation.tsx",
+    "action": "snapshot",
+    "sha256": "7e88ecf99d6ce3e304f1586bb4542a1f23c03bd62d8dcbb985d7f96a335f4c76"
+  },
+  {
+    "source": "src/rendering/src/components/NonSitecore/Timer.tsx",
+    "archive": "legacy/jss-infrastructure/src/components/NonSitecore/Timer.tsx",
+    "action": "snapshot",
+    "sha256": "8b590ae53f31dd562a0f2ae8639ffd7b19ac1291442df1caea59d0f23ccfb429"
+  },
+  {
+    "source": "src/rendering/src/components/nextjs-sxa/ColumnSplitter.tsx",
+    "archive": "legacy/jss-infrastructure/src/components/nextjs-sxa/ColumnSplitter.tsx",
+    "action": "snapshot",
+    "sha256": "89530907231ec1822ec7d0379070d0d1373eb0b04c1add0d3fea15a6a27c8098"
+  },
+  {
+    "source": "src/rendering/src/components/nextjs-sxa/Container.tsx",
+    "archive": "legacy/jss-infrastructure/src/components/nextjs-sxa/Container.tsx",
+    "action": "snapshot",
+    "sha256": "1f38088833b5d390353a4db50ff25f5bca4fb91ef6a5f48f41f9627d8b6ee932"
+  },
+  {
+    "source": "src/rendering/src/components/nextjs-sxa/Image.tsx",
+    "archive": "legacy/jss-infrastructure/src/components/nextjs-sxa/Image.tsx",
+    "action": "snapshot",
+    "sha256": "d38c6f32a9ec3f31c67d321fed4a0a0c45228cade205743bf1012b7ce265b211"
+  },
+  {
+    "source": "src/rendering/src/components/nextjs-sxa/LinkList.tsx",
+    "archive": "legacy/jss-infrastructure/src/components/nextjs-sxa/LinkList.tsx",
+    "action": "snapshot",
+    "sha256": "68189821256070573f6a7024893e7a655c62c62a2f0261a3ee5f69618ceea00e"
+  },
+  {
+    "source": "src/rendering/src/components/nextjs-sxa/PageContent.tsx",
+    "archive": "legacy/jss-infrastructure/src/components/nextjs-sxa/PageContent.tsx",
+    "action": "snapshot",
+    "sha256": "2a88ebf68dfaeed7ca7a00b65ef83c42773e7b77d6b64761092de8b46c126eda"
+  },
+  {
+    "source": "src/rendering/src/components/nextjs-sxa/PartialDesignDynamicPlaceholder.tsx",
+    "archive": "legacy/jss-infrastructure/src/components/nextjs-sxa/PartialDesignDynamicPlaceholder.tsx",
+    "action": "snapshot",
+    "sha256": "67cbca209964208dd5730fae4689e6f29f878f4b29d32455fcc9043044776d34"
+  },
+  {
+    "source": "src/rendering/src/components/nextjs-sxa/Promo.tsx",
+    "archive": "legacy/jss-infrastructure/src/components/nextjs-sxa/Promo.tsx",
+    "action": "snapshot",
+    "sha256": "01de0598fcdb31495e179d53ff9300bc6ce2baca1a05baef2416d9062efc59f8"
+  },
+  {
+    "source": "src/rendering/src/components/nextjs-sxa/RichText.tsx",
+    "archive": "legacy/jss-infrastructure/src/components/nextjs-sxa/RichText.tsx",
+    "action": "snapshot",
+    "sha256": "2ca6a79dfb362848d378791003c43f87497fdda483662684a5cd018b28f09272"
+  },
+  {
+    "source": "src/rendering/src/components/nextjs-sxa/RowSplitter.tsx",
+    "archive": "legacy/jss-infrastructure/src/components/nextjs-sxa/RowSplitter.tsx",
+    "action": "snapshot",
+    "sha256": "7ab0d1a63181d17ea3ff5ba9581d8c5d633fd4126110a37476e42e8bfb584242"
+  },
+  {
+    "source": "src/rendering/src/components/nextjs-sxa/Title.tsx",
+    "archive": "legacy/jss-infrastructure/src/components/nextjs-sxa/Title.tsx",
+    "action": "snapshot",
+    "sha256": "004152497de2b79eb9207eebd430b26c986991d6a630dca7000daad75fc9a345"
+  },
+  {
+    "source": "src/rendering/src/stories/Forms/AttendeeForm.stories.tsx",
+    "archive": "legacy/jss-infrastructure/src/stories/Forms/AttendeeForm.stories.tsx",
+    "action": "snapshot",
+    "sha256": "fa92ae01a2a6945c9420bb0a18895610795ff305a8a838f5940ade04066e4b53"
+  },
+  {
+    "source": "src/rendering/src/stories/Forms/RequestInfoForm.stories.tsx",
+    "archive": "legacy/jss-infrastructure/src/stories/Forms/RequestInfoForm.stories.tsx",
+    "action": "snapshot",
+    "sha256": "ce7663ef0f7c062b48092abcaf691b3ef8f30a5b1044889c95e436442977c763"
+  },
+  {
+    "source": "src/rendering/src/stories/Forms/SponsorizeForm.stories.tsx",
+    "archive": "legacy/jss-infrastructure/src/stories/Forms/SponsorizeForm.stories.tsx",
+    "action": "snapshot",
+    "sha256": "f936d3ec05b7195c52ba445bd1a39d9efddadc676d13b897b73d30412483dd7e"
+  },
+  {
+    "source": "src/rendering/src/stories/Navigation/Footer.stories.tsx",
+    "archive": "legacy/jss-infrastructure/src/stories/Navigation/Footer.stories.tsx",
+    "action": "snapshot",
+    "sha256": "571a5aa6871c53932c66376c7a982c0d2ee4cb5ef5116a415f858d4791f3620a"
+  },
+  {
+    "source": "src/rendering/src/stories/NonSitecore/InformationPageHero.stories.tsx",
+    "archive": "legacy/jss-infrastructure/src/stories/NonSitecore/InformationPageHero.stories.tsx",
+    "action": "snapshot",
+    "sha256": "8389560a056fc6bb959fe4ae97743f16f29ad7d39ddb23fb907e6302c9cf8e6b"
+  },
+  {
+    "source": "src/rendering/src/stories/PageContent/Section.stories.tsx",
+    "archive": "legacy/jss-infrastructure/src/stories/PageContent/Section.stories.tsx",
+    "action": "snapshot",
+    "sha256": "50b30e6ea5c9f45446a86461e8cea0a476edb1cc939a464e3c0e95202770bdfd"
+  },
+  {
+    "source": "src/rendering/src/stories/PageContent/SummitFeatures.stories.tsx",
+    "archive": "legacy/jss-infrastructure/src/stories/PageContent/SummitFeatures.stories.tsx",
+    "action": "snapshot",
+    "sha256": "aa039a680bcbb4af8ce7da08e6846144df9fde83557da2da14ab4567b3880469"
+  },
+  {
+    "source": "src/rendering/src/stories/PageContent/TicketGrid.stories.tsx",
+    "archive": "legacy/jss-infrastructure/src/stories/PageContent/TicketGrid.stories.tsx",
+    "action": "snapshot",
+    "sha256": "d4d5660e5dd6067dd5343dc02acd367aa9b11c27fb681dd52ef96af6e1eff742"
+  },
+  {
+    "source": "src/rendering/src/stories/Pages/HomePage.stories.tsx",
+    "archive": "legacy/jss-infrastructure/src/stories/Pages/HomePage.stories.tsx",
+    "action": "snapshot",
+    "sha256": "8d8eeba475c222559b3252ed4810dae34ef6d44e5b4e943563ede387abb99db8"
+  },
+  {
+    "source": "src/rendering/src/stories/Pages/SessionInformationPage.stories.tsx",
+    "archive": "legacy/jss-infrastructure/src/stories/Pages/SessionInformationPage.stories.tsx",
+    "action": "snapshot",
+    "sha256": "1f2f89dc29dbd2fb13d28f156424f459ccb240c8f7b4506beb9b4b6f7d3ef0c1"
+  },
+  {
+    "source": "src/rendering/src/stories/Pages/SpeakerInformationPage.stories.tsx",
+    "archive": "legacy/jss-infrastructure/src/stories/Pages/SpeakerInformationPage.stories.tsx",
+    "action": "snapshot",
+    "sha256": "857eecb5d9fafb2b33c40dc8de4efdda04fb1253f5438dd1f986de5807968ad3"
+  },
+  {
+    "source": "src/rendering/src/stories/Pages/VendorInformationPage.stories.tsx",
+    "archive": "legacy/jss-infrastructure/src/stories/Pages/VendorInformationPage.stories.tsx",
+    "action": "snapshot",
+    "sha256": "5e4725d5f5f1bc6680229970eeddd776784dd7c3fd562b151285b3a8247f2473"
+  },
+  {
+    "source": "src/rendering/src/stories/Payment/PaymentAndBillingForm.stories.tsx",
+    "archive": "legacy/jss-infrastructure/src/stories/Payment/PaymentAndBillingForm.stories.tsx",
+    "action": "snapshot",
+    "sha256": "fd4f1b84b5d155a5f442249de3a4b3176b3403db420fe6d13eaaa749fe2e0db0"
+  },
+  {
+    "source": "src/rendering/src/stories/Payment/PaymentConfirmed.stories.tsx",
+    "archive": "legacy/jss-infrastructure/src/stories/Payment/PaymentConfirmed.stories.tsx",
+    "action": "snapshot",
+    "sha256": "27685e6aedde32864f50a7b5d571a7f75615cbed8114e83f602254f0b03ae7c5"
+  },
+  {
+    "source": "src/rendering/src/stories/Payment/PaymentForm.stories.tsx",
+    "archive": "legacy/jss-infrastructure/src/stories/Payment/PaymentForm.stories.tsx",
+    "action": "snapshot",
+    "sha256": "cc1539cb6b28d1449a6acfbfa2e11a75b251bcfebddebe898b0149bb2d13504b"
+  },
+  {
+    "source": "src/rendering/src/stories/Payment/TicketPaymentConfirmed.stories.tsx",
+    "archive": "legacy/jss-infrastructure/src/stories/Payment/TicketPaymentConfirmed.stories.tsx",
+    "action": "snapshot",
+    "sha256": "dc2400461c5f7cc0e6d56f356afe929621f3efb44b2eebbd98588dc62d11a078"
+  },
+  {
+    "source": "src/rendering/src/stories/Sessions/SessionsFilters.stories.tsx",
+    "archive": "legacy/jss-infrastructure/src/stories/Sessions/SessionsFilters.stories.tsx",
+    "action": "snapshot",
+    "sha256": "2b2b4428a6766c4b5c7d0453e9895080634cd7efaa928abe7802299f08953d15"
+  },
+  {
+    "source": "src/rendering/src/components/nextjs-sxa/FEAASScripts.tsx",
+    "archive": "legacy/jss-infrastructure/src/components/nextjs-sxa/FEAASScripts.tsx",
+    "action": "snapshot",
+    "sha256": "dc836cdf9fdb9d3c288f352f1dbc1b5fbb8f0b55049ac1f0c59b64c26729352a"
+  },
+  {
+    "source": "src/rendering/src/hooks/usePagination.ts",
+    "archive": "legacy/jss-infrastructure/src/hooks/usePagination.ts",
+    "action": "snapshot",
+    "sha256": "5e52c2ba1bfa8ea22914d5cff6e91a1592aee8b30997c633d8771654815c348f"
+  },
+  {
+    "source": "src/rendering/src/components/Forms/RequestInfoForm.tsx",
+    "archive": "legacy/jss-infrastructure/src/components/Forms/RequestInfoForm.tsx",
+    "action": "snapshot",
+    "sha256": "86e40284cdf126f97bd5f180edeb39008206d40c4fbfb4d62c16a3e9d8307565"
+  },
+  {
+    "source": "src/rendering/src/components/Forms/SponsorizeForm.tsx",
+    "archive": "legacy/jss-infrastructure/src/components/Forms/SponsorizeForm.tsx",
+    "action": "snapshot",
+    "sha256": "75e99a077267e37f5121335d21166704093decf95323b79af3e9ce16728f7607"
+  },
+  {
+    "source": "src/rendering/src/components/Navigation/Header.tsx",
+    "archive": "legacy/jss-infrastructure/src/components/Navigation/Header.tsx",
+    "action": "snapshot",
+    "sha256": "da1daac3cb887ac89d10da8f65c56070c41e837b297ad4bac11ef6c99cb0447f"
+  },
+  {
+    "source": "src/rendering/scjssconfig.json",
+    "archive": "legacy/jss-infrastructure/scjssconfig.json",
+    "action": "move",
+    "sha256": "01b16e14256527e054cfd16d89cdfce337db83936c1ed8f60fe0f9537300bbd0"
+  },
+  {
+    "source": "src/rendering/sitecore/definitions/config.js",
+    "archive": "legacy/jss-infrastructure/sitecore/definitions/config.js",
+    "action": "move",
+    "sha256": "a0d7bec4f459a2eae5a21b332fce403d230aa8e309223f7f4e365241bf2f69b4"
+  },
+  {
+    "source": "src/rendering/sitecore/.gitignore",
+    "archive": "legacy/jss-infrastructure/sitecore/.gitignore",
+    "action": "move",
+    "sha256": "c8d967dd49e41d209b06621eeaa9c17f8a6a7bf4bfaa77123d4319fa7e7a071b"
+  },
+  {
+    "source": "src/rendering/src/temp/.gitignore",
+    "archive": "legacy/jss-infrastructure/src/temp/.gitignore",
+    "action": "move",
+    "sha256": "e0988208331433a80a1f41a0049be807ffb2259997ea9f69b33762126038d897"
+  }
+]

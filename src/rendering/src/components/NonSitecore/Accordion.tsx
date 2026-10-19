@@ -17,7 +17,7 @@ export type AccordionItemProps = {
   loading?: boolean;
 };
 
-const Accordion = (props: AccordionProps): JSX.Element => {
+const Accordion = (props: AccordionProps): React.JSX.Element => {
   const heading = !props.loading && props.heading;
   const loadingClass = props.loading ? 'loading' : '';
   const additionalClasses = props.additionalClasses ? props.additionalClasses : '';
@@ -34,7 +34,7 @@ const Accordion = (props: AccordionProps): JSX.Element => {
   );
 };
 
-const AccordionItem = (props: AccordionItemProps): JSX.Element => {
+const AccordionItem = (props: AccordionItemProps): React.JSX.Element => {
   const [active, setActive] = useState(false);
   const isDisabled = props.loading || props.disabled;
 

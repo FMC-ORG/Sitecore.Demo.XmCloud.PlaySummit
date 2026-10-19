@@ -1,21 +1,12 @@
-import { getGuestEmail, getGuestFirstName, getGuestLastName } from '../services/CdpService';
-
 type GuestData = {
   email: string;
   firstName: string;
   lastName: string;
 };
 
-export const getUserData = async (): Promise<GuestData> => {
-  const email = await getGuestEmail();
-  const firstName = await getGuestFirstName();
-  const lastName = await getGuestLastName();
-
-  const guestData = {
-    email: email || '',
-    firstName: firstName || '',
-    lastName: lastName || '',
-  };
-
-  return guestData;
-};
+/** The XMC-only demo does not prefill forms from archived legacy CDP profiles. */
+export const getUserData = async (): Promise<GuestData> => ({
+  email: '',
+  firstName: '',
+  lastName: '',
+});

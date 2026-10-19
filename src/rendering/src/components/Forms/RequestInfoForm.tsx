@@ -4,7 +4,7 @@ import { identifyVisitor } from '../../services/IdentificationService';
 import { getUserData } from '../../helpers/GuestDataHelper';
 import { ComponentProps } from 'lib/component-props';
 
-const RequestInfoForm = (props: ComponentProps): JSX.Element => {
+const RequestInfoForm = (props: ComponentProps): React.JSX.Element => {
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -33,9 +33,9 @@ const RequestInfoForm = (props: ComponentProps): JSX.Element => {
       return;
     }
 
-    return await identifyVisitor(email, firstName, lastName, phoneNumber).then(() => {
-      setIsFormSubmitted(true);
-    });
+    // The native IDENTITY event is sent in the background; the visitor is thanked immediately.
+    void identifyVisitor(email, firstName, lastName, phoneNumber);
+    setIsFormSubmitted(true);
   };
 
   const form = (
@@ -122,7 +122,7 @@ const RequestInfoForm = (props: ComponentProps): JSX.Element => {
       </div>
       <div className="footnote">
         <p>
-          Already have an account? <Link href="#">Log in.</Link>
+          Already have an account? <a href="#">Log in.</a>
         </p>
         <p>
           To find out more about how we are using this information you are giving up, please our{' '}

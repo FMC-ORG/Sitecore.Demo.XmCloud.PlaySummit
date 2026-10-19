@@ -20,7 +20,7 @@ export const getSessionTime = (timeslots: Timeslot[]): string => {
     const times: number[] = [];
     timeslots.forEach((timeslot) => {
       let startTime = parseInt(
-        (typeof timeslot.name === 'string' ? timeslot.name : timeslot.name.value) ?? ''
+        (typeof timeslot?.name === 'string' ? timeslot.name : timeslot?.name?.value) ?? ''
       );
       if (!Number.isNaN(startTime)) {
         if (startTime < 7) {
@@ -29,8 +29,9 @@ export const getSessionTime = (timeslots: Timeslot[]): string => {
         times.push(startTime);
       }
     });
-    times.sort();
-    if (timeslots.length > 1) {
+    times.sort((a, b) => a - b);
+    if (!times.length) return '';
+    if (times.length > 1) {
       sessionTime =
         getTimeString(times[0], false) + ' - ' + getTimeString(times[times.length - 1] + 1, true);
     } else {

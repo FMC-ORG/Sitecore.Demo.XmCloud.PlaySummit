@@ -7,7 +7,7 @@ import {
   ImageField,
   Image,
   withDatasourceCheck,
-} from '@sitecore-jss/sitecore-jss-nextjs';
+} from '@sitecore-content-sdk/nextjs';
 
 export type ThreeColumnsSectionProps = ComponentProps & {
   fields: {
@@ -25,7 +25,7 @@ export type ThreeColumnsSectionProps = ComponentProps & {
   };
 };
 
-const ThreeColumnsSection = ({ fields, params }: ThreeColumnsSectionProps): JSX.Element => {
+const ThreeColumnsSection = ({ fields, params }: ThreeColumnsSectionProps): React.JSX.Element => {
   const sxaStyles = `${params?.styles || ''}`;
 
   return (

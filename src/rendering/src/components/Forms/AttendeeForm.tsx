@@ -1,13 +1,12 @@
-import React, { FormEvent, useEffect, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import Router from 'next/router';
 import Link from 'next/link';
 import { ComponentProps } from 'lib/component-props';
 import { identifyVisitor } from '../../services/IdentificationService';
 import { getUserData } from '../../helpers/GuestDataHelper';
-import { logAttendeeFormCompleted } from 'src/services/CdpService';
 import { logAttendeeFormCompleted as logAttendeeFormCompletedCloudSDK } from 'src/services/CloudSDKService';
 
-const AttendeeForm = (props: ComponentProps): JSX.Element => {
+const AttendeeForm = (props: ComponentProps): React.JSX.Element => {
   const ticketId =
     typeof window === 'undefined' ? '0' : new URLSearchParams(window.location.search).get('ticket');
 
@@ -37,15 +36,12 @@ const AttendeeForm = (props: ComponentProps): JSX.Element => {
       return;
     }
 
-    await identifyVisitor(email, firstName, lastName);
-    await logAttendeeFormCompleted();
-
-    // Log the 'ATTENDEE_FORM_COMPLETED' custom event to CDP using the Cloud SDK
-    try {
-      await logAttendeeFormCompletedCloudSDK();
-    } catch (e) {
-      console.error(e);
-    }
+    // Native IDENTITY and ATTENDEE_FORM_COMPLETED events are sent in the background so a slow or
+    // unavailable Edge endpoint never holds up the visitor; the SPA keeps the requests alive.
+    void identifyVisitor(email, firstName, lastName);
+    logAttendeeFormCompletedCloudSDK().catch((e) =>
+      console.debug('Native attendee event unavailable.', e)
+    );
 
     Router.push(`/tickets/payment?ticket=${ticketId}`);
   };
@@ -111,7 +107,7 @@ const AttendeeForm = (props: ComponentProps): JSX.Element => {
       </div>
       <div className="footnote">
         <p>
-          Already have an account? <Link href="#">Log in.</Link>
+          Already have an account? <a href="#">Log in.</a>
         </p>
         <p>
           To find out more about how we are using this information you are giving up, please review

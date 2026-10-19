@@ -7,7 +7,7 @@ import {
   RichText,
   Text,
   withDatasourceCheck,
-} from '@sitecore-jss/sitecore-jss-nextjs';
+} from '@sitecore-content-sdk/nextjs';
 import { ComponentProps } from 'lib/component-props';
 
 type FullImageSectionProps = ComponentProps & {
@@ -20,7 +20,7 @@ type FullImageSectionProps = ComponentProps & {
   };
 };
 
-const FullImageSection = ({ fields, params }: FullImageSectionProps): JSX.Element => {
+const FullImageSection = ({ fields, params }: FullImageSectionProps): React.JSX.Element => {
   const sxaStyles = `${params?.styles || ''}`;
 
   const callToAction = fields.callToActionLink && (
@@ -29,7 +29,7 @@ const FullImageSection = ({ fields, params }: FullImageSectionProps): JSX.Elemen
 
   return (
     <section className={`section full-image-section ${sxaStyles}`}>
-      <Image field={fields.backgroundImage} alt={fields.title} loading="lazy" />
+      <Image field={fields.backgroundImage} alt={fields.title?.value} loading="lazy" />
       <div className="section-content full-image-section-content container">
         <div className="content-card">
           <Text tag="h5" field={fields.subtitle} />

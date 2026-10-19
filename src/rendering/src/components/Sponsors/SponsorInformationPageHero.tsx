@@ -1,4 +1,4 @@
-import { Field, ImageField } from '@sitecore-jss/sitecore-jss-nextjs';
+import { Field, ImageField } from '@sitecore-content-sdk/nextjs';
 import { ComponentProps } from 'lib/component-props';
 import InformationPageHero from '../NonSitecore/InformationPageHero';
 import Head from 'next/head';
@@ -15,8 +15,8 @@ export type SponsorInformationPageHeroProps = ComponentProps & {
   };
 };
 
-const SponsorInformationPageHero = (props: SponsorInformationPageHeroProps): JSX.Element => {
-  const { fields, ...propsRest } = props;
+const SponsorInformationPageHero = (props: SponsorInformationPageHeroProps): React.JSX.Element => {
+  const { fields = {} as SponsorInformationPageHeroProps['fields'], ...propsRest } = props;
   const newFields = {
     Name: fields.Name,
     Image: fields.Logo,
@@ -25,13 +25,13 @@ const SponsorInformationPageHero = (props: SponsorInformationPageHeroProps): JSX
     InstagramProfileLink: fields.InstagramProfileLink,
     LinkedinProfileLink: fields.LinkedinProfileLink,
   };
-  const qualificative = props.fields.Level?.value ? props.fields.Level.value : '';
+  const qualificative = fields.Level?.value ? fields.Level.value : '';
 
   return (
     <>
       <Head>
-        <meta property="og:title" content={props.fields?.Name?.value} />
-        <meta property="og:image" content={props.fields?.Logo?.value.src} />
+        <meta property="og:title" content={fields.Name?.value} />
+        <meta property="og:image" content={fields.Logo?.value?.src} />
         <meta property="og:type" content="sponsor" />
       </Head>
       <InformationPageHero

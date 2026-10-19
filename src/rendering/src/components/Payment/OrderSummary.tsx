@@ -7,7 +7,7 @@ type OrderSummaryProps = {
   ticketID?: number;
 };
 
-const OrderSummary = (props: OrderSummaryProps): JSX.Element => {
+const OrderSummary = (props: OrderSummaryProps): React.JSX.Element => {
   const [ticketID, setTicketID] = useState(null);
   const ticketOfferId = useTicketOfferId();
 

@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { getPublicAssetUrl } from '../../../src/helpers/PublicUrlHelper';
 
-const TicketPaymentConfirmed = (): JSX.Element => {
+const TicketPaymentConfirmed = (): React.JSX.Element => {
   const publicUrl = getPublicAssetUrl();
 
   return (

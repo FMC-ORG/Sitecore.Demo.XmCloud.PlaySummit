@@ -1,5 +1,5 @@
 import { ComponentWithChildrenProps } from 'lib/component-props';
-import { Field, Placeholder, RichText } from '@sitecore-jss/sitecore-jss-nextjs';
+import { Field, Placeholder, RichText } from '@sitecore-content-sdk/nextjs';
 import Head from 'next/head';
 import { removeTags } from 'src/helpers/ContentSearchHelper';
 
@@ -9,7 +9,7 @@ export type VendorInformationProps = ComponentWithChildrenProps & {
   };
 };
 
-const VendorInformation = (props: VendorInformationProps): JSX.Element => {
+const VendorInformation = (props: VendorInformationProps): React.JSX.Element => {
   const sxaStyles = `${props.params?.styles || ''}`;
 
   const placeholder = !!props.rendering && (
@@ -26,7 +26,7 @@ const VendorInformation = (props: VendorInformationProps): JSX.Element => {
           <div className="information-grid">
             <div className="main-col">
               <div className="column-title">Vendor history:</div>
-              <RichText className="rich-text" field={props.fields.Description} />
+              <RichText className="rich-text" field={props.fields?.Description} />
             </div>
             <div className="sidebar-col">
               <div className="column-title">Sessions:</div>

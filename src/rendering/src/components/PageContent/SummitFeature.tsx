@@ -6,7 +6,7 @@ import {
   Link,
   Image,
   withDatasourceCheck,
-} from '@sitecore-jss/sitecore-jss-nextjs';
+} from '@sitecore-content-sdk/nextjs';
 import { ComponentProps } from 'lib/component-props';
 
 export type SummitFeatureProps = ComponentProps & {
@@ -18,7 +18,7 @@ export type SummitFeatureProps = ComponentProps & {
   };
 };
 
-const SummitFeature = (props: SummitFeatureProps): JSX.Element => {
+const SummitFeature = (props: SummitFeatureProps): React.JSX.Element => {
   const sxaStyles = `${props.params?.styles || ''}`;
 
   return (

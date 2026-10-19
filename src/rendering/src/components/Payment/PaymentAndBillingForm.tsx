@@ -3,11 +3,9 @@ import Router from 'next/router';
 
 import { getPublicAssetUrl } from '../../../src/helpers/PublicUrlHelper';
 import { logTicketPurchase as logTicketPurchaseCloudSDK } from '../../services/CloudSDKService';
-import { logTicketPurchase } from '../../services/CdpService';
-import useTicketOfferId from 'src/hooks/useTicketOffer';
+import { TICKETS } from '../../models/mock-tickets';
 
-const PaymentAndBillingForm = (): JSX.Element => {
-  const ticketOfferId = useTicketOfferId();
+const PaymentAndBillingForm = (): React.JSX.Element => {
   const publicUrl = getPublicAssetUrl();
 
   const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -18,26 +16,22 @@ const PaymentAndBillingForm = (): JSX.Element => {
         ? '0'
         : new URLSearchParams(window.location.search).get('ticket');
 
-    if (!ticketId?.trim()) {
+    const selectedTicketId = Number(ticketId);
+    if (!ticketId?.trim() || !Number.isInteger(selectedTicketId) || !TICKETS[selectedTicketId]) {
       alert(
         'Ticket information unavailable. Please go back to the tickets page and select a valid ticket.'
       );
       return;
     }
 
-    // Log the 'TICKET_PURCHASED' custom event to CDP using the Cloud SDK
-    try {
-      await logTicketPurchaseCloudSDK(parseInt(ticketId));
-    } catch (e) {
-      console.error(e);
-    }
+    // Native payment/purchase events are sent in the background so Edge latency never blocks
+    // the simulated confirmation.
+    logTicketPurchaseCloudSDK(selectedTicketId).catch((e) =>
+      console.debug('Native purchase events unavailable.', e)
+    );
 
-    return await logTicketPurchase(parseInt(ticketId), parseInt(ticketId) === ticketOfferId)
-      .then(() => Router.push(`/tickets/payment/confirmed?ticket=${ticketId}`))
-      .catch((e) => {
-        console.log(e);
-        alert('An error occured while processing the purchase.');
-      });
+    // This remains a simulated CMS ticket journey, not a payment-provider operation.
+    await Router.push(`/tickets/payment/confirmed?ticket=${ticketId}`);
   };
 
   return (

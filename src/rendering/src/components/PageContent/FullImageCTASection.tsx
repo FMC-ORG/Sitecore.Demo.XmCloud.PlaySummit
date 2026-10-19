@@ -4,7 +4,7 @@ import {
   ImageField,
   LinkField,
   withDatasourceCheck,
-} from '@sitecore-jss/sitecore-jss-nextjs';
+} from '@sitecore-content-sdk/nextjs';
 import { ComponentProps } from 'lib/component-props';
 
 type FullImageCTASectionProps = ComponentProps & {
@@ -14,7 +14,7 @@ type FullImageCTASectionProps = ComponentProps & {
   };
 };
 
-const FullImageCTASection = (props: FullImageCTASectionProps): JSX.Element => {
+const FullImageCTASection = (props: FullImageCTASectionProps): React.JSX.Element => {
   const sxaStyles = `${props.params?.styles || ''}`;
   const callToAction = props.fields?.callToActionLink && (
     <Link field={props.fields?.callToActionLink} className="btn-square" />

@@ -27,7 +27,7 @@ stages:
       steps:
         - task: NodeTool@0
           inputs:
-            versionSpec: '20.10.0'
+            versionSpec: '24.19.0'
           displayName: 'Install Node.js'
         - task: Cache@2
           displayName: "Cache npm packages"
@@ -44,6 +44,8 @@ stages:
             npm run lint
           displayName: 'npm run lint'
           workingDirectory: src/rendering
+        # Content SDK builds fetch site data: provide SITECORE_EDGE_CONTEXT_ID (or local API host/key)
+        # as secret pipeline variables. Storybook preparation below is offline. Not certified by the migration.
         - script: |
             npm run build:local
           displayName: 'npm run build:local'
@@ -59,7 +61,7 @@ stages:
       steps:
         - task: NodeTool@0
           inputs:
-            versionSpec: '20.10.0'
+            versionSpec: '24.19.0'
           displayName: 'Install Node.js'
         - task: Cache@2
           displayName: "Cache npm packages"

@@ -1,21 +1,16 @@
-import { identifyVisitor as identifyVisitorInCdpCloudSDK } from './CloudSDKService';
-import { identifyVisitor as identifyVisitorInCdp } from './CdpService';
-import { identifyVisitor as identifyVisitorInSend } from './SendService';
+import { identifyVisitor as identifyVisitorInXmc } from './CloudSDKService';
 
+/** Native telemetry is optional for the CMS demo form; no legacy guest profile is accessed. */
 export async function identifyVisitor(
   email: string,
   firstName?: string,
   lastName?: string,
   phoneNumber?: string
 ): Promise<unknown> {
-  identifyVisitorInSend(email, firstName, lastName);
-
-  // Log the 'IDENTITY' event to CDP using the Cloud SDK
   try {
-    await identifyVisitorInCdpCloudSDK(email, firstName, lastName, phoneNumber);
-  } catch (e) {
-    console.error(e);
+    return await identifyVisitorInXmc(email, firstName, lastName, phoneNumber);
+  } catch {
+    console.debug('Native visitor identification is unavailable; continuing the CMS demo form.');
+    return undefined;
   }
-
-  return identifyVisitorInCdp(email, firstName, lastName, phoneNumber);
 }

@@ -1,7 +1,7 @@
 import { CSSProperties } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Link from 'next/link';
-import { Text } from '@sitecore-jss/sitecore-jss-nextjs';
+import { Text } from '@sitecore-content-sdk/nextjs';
 import { faCalendar, faClock, faStar, faUser } from '@fortawesome/free-solid-svg-icons';
 import { getSessionTime } from '../../helpers/DateHelper';
 import { GraphQLSession } from 'src/types/session';
@@ -10,7 +10,7 @@ type SessionItemProps = {
   session: GraphQLSession;
 };
 
-const SessionItem = (props: SessionItemProps): JSX.Element => {
+const SessionItem = (props: SessionItemProps): React.JSX.Element => {
   const getImageStyles = (session: GraphQLSession): CSSProperties =>
     session?.image?.jsonValue?.value?.src
       ? {
@@ -27,7 +27,7 @@ const SessionItem = (props: SessionItemProps): JSX.Element => {
   const day =
     props.session.day?.targetItems &&
     props.session.day.targetItems.length > 0 &&
-    props.session.day.targetItems.map((day, index) => (
+    props.session.day.targetItems.filter(Boolean).map((day, index) => (
       <p key={index}>
         <span>
           <FontAwesomeIcon className="icon" icon={faCalendar} />
@@ -48,16 +48,16 @@ const SessionItem = (props: SessionItemProps): JSX.Element => {
 
   const speaker =
     props.session.speakers?.targetItems &&
-    props.session.speakers.targetItems.map((speaker, index) => (
+    props.session.speakers.targetItems.filter(Boolean).map((speaker, index) => (
       <p key={index}>
         <span>
           <FontAwesomeIcon className="icon" icon={faUser} />
         </span>
         <Text tag="span" className="speaker-name" field={speaker.name} />
-        {speaker.jobTitle?.value && (
+        {(speaker.jobTitle?.value || speaker.role?.value) && (
           <span>
             {' | '}
-            <Text tag="span" field={speaker.jobTitle} />
+            <Text tag="span" field={speaker.jobTitle?.value ? speaker.jobTitle : speaker.role} />
           </span>
         )}
       </p>

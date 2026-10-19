@@ -1,12 +1,6 @@
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  Field,
-  Image,
-  ImageField,
-  Text,
-  withDatasourceCheck,
-} from '@sitecore-jss/sitecore-jss-nextjs';
+import { Field, Image, ImageField, Text, withDatasourceCheck } from '@sitecore-content-sdk/nextjs';
 import { ComponentProps } from 'lib/component-props';
 import { useI18n } from 'next-localization';
 import Link from 'next/link';
@@ -21,11 +15,11 @@ export type FeaturedEventProps = ComponentProps & {
   };
 };
 
-const FeaturedEvent = (props: FeaturedEventProps): JSX.Element => {
+const FeaturedEvent = (props: FeaturedEventProps): React.JSX.Element => {
   const sxaStyles = `${props.params?.styles || ''}`;
   const { t } = useI18n();
 
-  const speakersSection = props.fields?.Speakers.map((speaker) => (
+  const speakersSection = props.fields?.Speakers?.map((speaker) => (
     <div className="event-subtitle" key={speaker.fields?.Name.value}>
       <FontAwesomeIcon className="icon" icon={faUser} />
       <Text field={speaker.fields?.Name} />
@@ -36,7 +30,7 @@ const FeaturedEvent = (props: FeaturedEventProps): JSX.Element => {
   return (
     <section
       className={`featured-event ${
-        props.fields?.Premium.value ? 'premium-event' : ''
+        props.fields?.Premium?.value ? 'premium-event' : ''
       } ${sxaStyles}`}
     >
       <Image field={props.fields?.Image} alt="Image" loading="lazy" />

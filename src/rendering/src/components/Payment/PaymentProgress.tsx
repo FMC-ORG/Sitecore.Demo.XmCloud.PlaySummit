@@ -1,4 +1,4 @@
-import { Field } from '@sitecore-jss/sitecore-jss-nextjs';
+import { Field } from '@sitecore-content-sdk/nextjs';
 import { ComponentProps } from 'lib/component-props';
 import RequireDatasource from '../NonSitecore/RequireDatasource';
 import Link from 'next/link';
@@ -22,7 +22,7 @@ function GetActiveClass(activeStep: number, index: number) {
   return className;
 }
 
-const PaymentProgress = (props: PaymentProgressProps): JSX.Element => {
+const PaymentProgress = (props: PaymentProgressProps): React.JSX.Element => {
   const router = useRouter();
   const sxaStyles = `${props.params?.styles || ''}`;
 
@@ -54,7 +54,7 @@ const PaymentProgress = (props: PaymentProgressProps): JSX.Element => {
     <Link
       href={step.link}
       key={index}
-      className={GetActiveClass(props.fields.ActiveStep.value, step.index)}
+      className={GetActiveClass(Number(props.fields.ActiveStep?.value), step.index)}
     >
       {step.text}
       <span>{step.index < steps.length ? '❯' : ''}</span>

@@ -1,11 +1,5 @@
-import profile from '../../../public/assets/img/news/profile-pic.jpg';
 import Link from 'next/link';
-import {
-  Image,
-  withDatasourceCheck,
-  LayoutServicePageState,
-  useSitecoreContext,
-} from '@sitecore-jss/sitecore-jss-nextjs';
+import { withDatasourceCheck, useSitecore } from '@sitecore-content-sdk/nextjs';
 import { ComponentProps } from 'lib/component-props';
 import { News } from 'src/types/news';
 import { getPublicAssetUrl } from '../../../src/helpers/PublicUrlHelper';
@@ -16,10 +10,10 @@ type NewsGridProps = ComponentProps & {
   };
 };
 
-const NewsGrid = (props: NewsGridProps): JSX.Element => {
-  const { sitecoreContext } = useSitecoreContext();
+const NewsGrid = (props: NewsGridProps): React.JSX.Element => {
+  const { page } = useSitecore();
 
-  const isPageEditing = sitecoreContext.pageState === LayoutServicePageState.Edit;
+  const isPageEditing = page.mode.isEditing;
   const hasNews = !!props.fields;
   const publicUrl = getPublicAssetUrl();
 
@@ -29,27 +23,28 @@ const NewsGrid = (props: NewsGridProps): JSX.Element => {
 
   const pageEditingMissingDatasource = !hasNews && isPageEditing && <p>Missing Datasource Item</p>;
 
-  const newsCards =
-    props.fields?.items &&
-    props.fields.items
-      .sort((a, b) => a.fields.PublishDate.value.localeCompare(b.fields.PublishDate.value))
-      .reverse()
-      .slice(0, 4)
-      .map((news, index) => (
-        <div key={index} className="news-grid-item">
-          <Link href={news.url} passHref>
-            <img
-              className="item-image"
-              src={news.fields.Image?.value?.src}
-              alt="News"
-              width="465px"
-              height="260px"
-              loading="lazy"
-            />
-            {news.fields.Title?.value}
-          </Link>
-        </div>
-      ));
+  // Newest four by PublishDate. Copy before sorting so shared layout data is not mutated;
+  // undated or deleted children sort last instead of crashing the grid.
+  const publishDate = (news: News) => news.fields?.PublishDate?.value ?? '';
+  const newsCards = (props.fields?.items ?? [])
+    .filter((news) => news?.url)
+    .sort((a, b) => publishDate(b).localeCompare(publishDate(a)))
+    .slice(0, 4)
+    .map((news, index) => (
+      <div key={index} className="news-grid-item">
+        <Link href={news.url} passHref>
+          <img
+            className="item-image"
+            src={news.fields?.Image?.value?.src}
+            alt="News"
+            width="465px"
+            height="260px"
+            loading="lazy"
+          />
+          {news.fields?.Title?.value}
+        </Link>
+      </div>
+    ));
 
   const newsGrid = hasNews && (
     <div className={`section-news-grid ${sxaStyles}`}>
@@ -64,8 +59,9 @@ const NewsGrid = (props: NewsGridProps): JSX.Element => {
         />
         <div className="tweet-content">
           <div className="tweet-profile">
-            <Image
-              src={profile}
+            {/* Static demo asset; served from public like the adjacent conference image. */}
+            <img
+              src={`${publicUrl}/assets/img/news/profile-pic.jpg`}
               alt="News"
               width="60px"
               className="tweet-profile-pic"

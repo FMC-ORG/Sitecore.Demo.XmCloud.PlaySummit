@@ -1,4 +1,4 @@
-import { Field, Image, ImageField, Text } from '@sitecore-jss/sitecore-jss-nextjs';
+import { Field, Image, ImageField, Text } from '@sitecore-content-sdk/nextjs';
 import { ComponentProps } from 'lib/component-props';
 import InfoText from '../NonSitecore/InfoText';
 import { faCalendar, faClock, faDoorOpen } from '@fortawesome/free-solid-svg-icons';
@@ -23,7 +23,7 @@ export type SessionInformationPageHeroProps = ComponentProps & {
   HACK: This file is a duplicate of InformationPageHero.tsx with modifications only for the session page hero.
   TODO: Try to merge the differences of this component into InformationPageHero.tsx without breaking the SpeakerInformationPageHero.tsx and VendorInformationPageHero.tsx components. Then only add specific content for session page hero in this file. Similar to what is being done in SpeakerInformationPageHero.tsx
 */
-const SessionInformationPageHero = (props: SessionInformationPageHeroProps): JSX.Element => {
+const SessionInformationPageHero = (props: SessionInformationPageHeroProps): React.JSX.Element => {
   const premiumSessionQualificative = props?.fields?.Premium?.value ? 'premium' : '';
   const { t } = useI18n();
 
@@ -32,7 +32,7 @@ const SessionInformationPageHero = (props: SessionInformationPageHeroProps): JSX
       className={`information-page-hero session-information-page-hero ${premiumSessionQualificative}`}
     >
       <div className="background-container">
-        <Image field={props.fields.Image} alt="Image" loading="lazy" />
+        <Image field={props.fields?.Image} alt="Image" loading="lazy" />
         <div className="content">
           <div className="content-container">
             <div className="container-content-text">

@@ -1,59 +1,48 @@
-import config from 'temp/config';
-import {
-  GraphQLErrorPagesService,
-  SitecoreContext,
-  ErrorPages,
-} from '@sitecore-jss/sitecore-jss-nextjs';
-import { SitecorePageProps } from 'lib/page-props';
-import NotFound from 'src/NotFound';
-import { componentBuilder } from 'temp/componentBuilder';
-import Layout from 'src/Layout';
+import { JSX } from 'react';
 import { GetStaticProps } from 'next';
-import { siteResolver } from 'lib/site-resolver';
-import clientFactory from 'lib/graphql-client-factory';
+import { SitecorePageProps, ErrorPage } from '@sitecore-content-sdk/nextjs';
+import client from 'lib/sitecore-client';
+import NotFound from 'src/NotFound';
+import Layout from 'src/Layout';
+import Providers from 'src/Providers';
+import scConfig from 'sitecore.config';
+import components from '.sitecore/component-map';
 
 const Custom404 = (props: SitecorePageProps): JSX.Element => {
-  if (!(props && props.layoutData)) {
+  if (!(props && props.page)) {
     return <NotFound />;
   }
 
   return (
-    <SitecoreContext
-      componentFactory={componentBuilder.getComponentFactory()}
-      layoutData={props.layoutData}
-    >
-      <Layout layoutData={props.layoutData} headLinks={props.headLinks} />
-    </SitecoreContext>
+    <Providers componentProps={props.componentProps} page={props.page}>
+      <Layout page={props.page} />
+    </Providers>
   );
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  const site = siteResolver.getByName(config.sitecoreSiteName);
-  const errorPagesService = new GraphQLErrorPagesService({
-    clientFactory,
-    siteName: site.name,
-    language: context.locale || config.defaultLanguage,
-    retries:
-      (process.env.GRAPH_QL_SERVICE_RETRIES &&
-        parseInt(process.env.GRAPH_QL_SERVICE_RETRIES, 10)) ||
-      0,
-  });
-  let resultErrorPages: ErrorPages | null = null;
+  const props: SitecorePageProps = {
+    page: null,
+  };
 
-  if (!process.env.DISABLE_SSG_FETCH) {
+  if (scConfig.generateStaticPaths) {
     try {
-      resultErrorPages = await errorPagesService.fetchErrorPages();
+      props.page = await client.getErrorPage(ErrorPage.NotFound, {
+        site: scConfig.defaultSite,
+        locale: context.locale || context.defaultLocale || scConfig.defaultLanguage,
+      });
     } catch (error) {
       console.log('Error occurred while fetching error pages');
       console.log(error);
     }
   }
 
+  if (props.page) {
+    props.componentProps = await client.getComponentData(props.page.layout, context, components);
+  }
+
   return {
-    props: {
-      headLinks: [],
-      layoutData: resultErrorPages?.notFoundPage?.rendered || null,
-    },
+    props,
   };
 };
 

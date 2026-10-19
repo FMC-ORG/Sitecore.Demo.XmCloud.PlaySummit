@@ -5,9 +5,12 @@
 
 # testing
 /coverage
+/test-results/
+/playwright-report/
 
 # next.js
 /.next*/
+*.tsbuildinfo
 /out/
 
 # graphql code generation
@@ -24,6 +27,9 @@
 
 # Log files
 *.log*
+
+# Content SDK generated artifacts
+/.sitecore/
 
 # sitecore
 # DEMO TEAM CUSTOMIZATION - Keep scjssconfig.json under source control

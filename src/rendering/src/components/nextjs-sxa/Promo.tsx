@@ -1,4 +1,3 @@
-import React from 'react';
 // DEMO TEAM CUSTOMIZATION - Removed Field and Text. Added RichTextField.
 import {
   NextImage as JssImage,
@@ -7,7 +6,7 @@ import {
   ImageField,
   LinkField,
   RichTextField,
-} from '@sitecore-jss/sitecore-jss-nextjs';
+} from '@sitecore-content-sdk/nextjs';
 // END CUSTOMIZATION
 
 interface Fields {
@@ -24,7 +23,7 @@ type PromoProps = {
   fields: Fields;
 };
 
-const PromoDefaultComponent = (props: PromoProps): JSX.Element => (
+const PromoDefaultComponent = (props: PromoProps): React.JSX.Element => (
   <div className={`component promo ${props.params.styles}`}>
     <div className="component-content">
       <span className="is-empty-hint">Promo</span>
@@ -32,7 +31,7 @@ const PromoDefaultComponent = (props: PromoProps): JSX.Element => (
   </div>
 );
 
-export const Default = (props: PromoProps): JSX.Element => {
+export const Default = (props: PromoProps): React.JSX.Element => {
   const id = props.params.RenderingIdentifier;
   if (props.fields) {
     return (
@@ -67,7 +66,7 @@ export const Default = (props: PromoProps): JSX.Element => {
   return <PromoDefaultComponent {...props} />;
 };
 
-export const WithText = (props: PromoProps): JSX.Element => {
+export const WithText = (props: PromoProps): React.JSX.Element => {
   const id = props.params.RenderingIdentifier;
   if (props.fields) {
     return (
@@ -97,7 +96,7 @@ export const WithText = (props: PromoProps): JSX.Element => {
 };
 
 // DEMO TEAM CUSTOMIZATION - New variant
-export const WithColumns = (props: PromoProps): JSX.Element => {
+export const WithColumns = (props: PromoProps): React.JSX.Element => {
   if (props.fields) {
     return (
       <div className={`component promo promo-columns ${props.params.styles}`}>

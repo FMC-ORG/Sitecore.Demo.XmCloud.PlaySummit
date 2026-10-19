@@ -6,7 +6,7 @@ type InfoTextProps = PropsWithChildren<{
   Icon: IconProp;
 }>;
 
-function InfoText(props: InfoTextProps): JSX.Element {
+function InfoText(props: InfoTextProps): React.JSX.Element {
   return (
     <div className="info-text">
       <span>

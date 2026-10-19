@@ -1,5 +1,5 @@
 import { ComponentWithChildrenProps } from 'lib/component-props';
-import { Field, Placeholder, RichText } from '@sitecore-jss/sitecore-jss-nextjs';
+import { Field, Placeholder, RichText } from '@sitecore-content-sdk/nextjs';
 import { useI18n } from 'next-localization';
 import Head from 'next/head';
 import { removeTags } from 'src/helpers/ContentSearchHelper';
@@ -10,7 +10,7 @@ export type SpeakerInformationProps = ComponentWithChildrenProps & {
   };
 };
 
-const SpeakerInformation = (props: SpeakerInformationProps): JSX.Element => {
+const SpeakerInformation = (props: SpeakerInformationProps): React.JSX.Element => {
   const sxaStyles = `${props.params?.styles || ''}`;
   const { t } = useI18n();
 

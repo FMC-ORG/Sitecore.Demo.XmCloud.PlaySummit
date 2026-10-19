@@ -1,10 +1,4 @@
-import {
-  Text,
-  Field,
-  Image,
-  LayoutServicePageState,
-  useSitecoreContext,
-} from '@sitecore-jss/sitecore-jss-nextjs';
+import { Text, Field, Image, useSitecore } from '@sitecore-content-sdk/nextjs';
 import { ComponentProps } from 'lib/component-props';
 import { GraphQLSpeaker } from 'src/types/speaker';
 import Link from 'next/link';
@@ -13,7 +7,7 @@ export type FeaturedSpeakersProps = ComponentProps & {
   fields: {
     data: {
       source: {
-        numberOfSpeakers: Field<number>;
+        numberOfSpeakers: Field<number | string>;
       };
       item: {
         children: {
@@ -24,21 +18,15 @@ export type FeaturedSpeakersProps = ComponentProps & {
   };
 };
 
-const getSpeakerNumberToShow = function (props: FeaturedSpeakersProps) {
-  let numberOfSpeakers = props.fields.data.item.children.results.length;
-  if (!!props.fields.data.source?.numberOfSpeakers?.value) {
-    const providedNumberOfSpeakers = props.fields.data.source?.numberOfSpeakers?.value;
-    if (!isNaN(providedNumberOfSpeakers) && providedNumberOfSpeakers > 0) {
-      numberOfSpeakers = providedNumberOfSpeakers;
-    }
-  }
-  return numberOfSpeakers;
+// GraphQL `field(name:)` returns the datasource number as a string; accept either shape.
+const getSpeakerNumberToShow = (props: FeaturedSpeakersProps, available: number): number => {
+  const provided = Number(props.fields?.data?.source?.numberOfSpeakers?.value);
+  return Number.isFinite(provided) && provided > 0 ? provided : available;
 };
 
-const FeaturedSpeakers = (props: FeaturedSpeakersProps): JSX.Element => {
-  const { sitecoreContext } = useSitecoreContext();
-
-  const isPageEditing = sitecoreContext.pageState === LayoutServicePageState.Edit;
+const FeaturedSpeakers = (props: FeaturedSpeakersProps): React.JSX.Element => {
+  const { page } = useSitecore();
+  const isPageEditing = page.mode.isEditing;
   const hasSpeakers = !!props.fields?.data?.item;
 
   const sxaStyles = `${props.params?.styles || ''}`;
@@ -49,31 +37,30 @@ const FeaturedSpeakers = (props: FeaturedSpeakersProps): JSX.Element => {
     <p>Missing Datasource Item</p>
   );
 
-  const speakers =
-    props.fields.data?.item?.children?.results &&
-    props.fields.data.item.children.results
-      .filter((item) => item.featured.value)
-      .sort()
-      .slice(0, getSpeakerNumberToShow(props))
-      .map((speaker, index) => (
-        <Link key={index} href={speaker.url.path} passHref>
-          <div className="grid-item">
-            <div className="item-image">
-              <Image
-                field={speaker.picture.jsonValue}
-                alt={speaker.name.value}
-                width={265}
-                height={265}
-                loading="lazy"
-              />
-            </div>
-            <div className="item-details">
-              <Text tag="p" className="item-title" field={speaker.name} />
-              <Text tag="p" field={speaker.jobTitle} />
-            </div>
+  const featured = (props.fields?.data?.item?.children?.results ?? []).filter(
+    (speaker) => speaker?.url?.path && speaker.featured?.value
+  );
+  const speakers = featured
+    .slice(0, getSpeakerNumberToShow(props, featured.length))
+    .map((speaker, index) => (
+      <Link key={index} href={speaker.url.path} passHref>
+        <div className="grid-item">
+          <div className="item-image">
+            <Image
+              field={speaker.picture?.jsonValue}
+              alt={speaker.name?.value}
+              width={265}
+              height={265}
+              loading="lazy"
+            />
           </div>
-        </Link>
-      ));
+          <div className="item-details">
+            <Text tag="p" className="item-title" field={speaker.name} />
+            <Text tag="p" field={speaker.jobTitle} />
+          </div>
+        </div>
+      </Link>
+    ));
 
   const featuredSpeakers = hasSpeakers && (
     <div className={`featured-speakers item-grid ${sxaStyles}`}>

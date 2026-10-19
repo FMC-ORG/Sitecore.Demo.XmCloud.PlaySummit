@@ -1,10 +1,4 @@
-import {
-  Text,
-  RichText,
-  Field,
-  Image,
-  withDatasourceCheck,
-} from '@sitecore-jss/sitecore-jss-nextjs';
+import { Text, RichText, Field, Image, withDatasourceCheck } from '@sitecore-content-sdk/nextjs';
 import { ComponentProps } from 'lib/component-props';
 import { Testimony } from 'src/types/testimony';
 
@@ -16,7 +10,7 @@ type TestimonyListProps = ComponentProps & {
   };
 };
 
-const TestimonyList = (props: TestimonyListProps): JSX.Element => {
+const TestimonyList = (props: TestimonyListProps): React.JSX.Element => {
   const sxaStyles = `${props.params?.styles || ''}`;
 
   const testimonies =

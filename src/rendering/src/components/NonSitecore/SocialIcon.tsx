@@ -1,4 +1,4 @@
-import { Field } from '@sitecore-jss/sitecore-jss-nextjs';
+import { Field } from '@sitecore-content-sdk/nextjs';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -7,7 +7,7 @@ type SocialIconProps = {
   Icon: IconProp;
 };
 
-function SocialIcon(props: SocialIconProps): JSX.Element {
+function SocialIcon(props: SocialIconProps): React.JSX.Element {
   if (!props?.Link?.value) {
     return <></>;
   }

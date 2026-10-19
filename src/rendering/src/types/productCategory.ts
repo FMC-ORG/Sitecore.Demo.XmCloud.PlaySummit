@@ -1,4 +1,4 @@
-import { Field, ImageField } from '@sitecore-jss/sitecore-jss-nextjs';
+import { Field, ImageField } from '@sitecore-content-sdk/nextjs';
 
 export type ProductCategory = {
   fields: {

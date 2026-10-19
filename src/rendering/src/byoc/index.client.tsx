@@ -1,7 +1,7 @@
 import * as FEAAS from '@sitecore-feaas/clientside/react';
 /**
  * Below are Sitecore default BYOC components. Included components will be available in Pages and Components apps out of the
- * box for convenience. It is advised to comment out unused components when application is ready for production
+ * box for convenience. It is advised to comment out unused components when application is ready for production
  * to reduce javascript bundle size.
  */
 
